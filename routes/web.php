@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Autenticação com o Google
 Route::get('auth/google', 'Auth\GoogleController@redirectToProvider')->name('google.auth');
 Route::get('auth/google/callback', 'Auth\GoogleController@handleProviderCallback');
 

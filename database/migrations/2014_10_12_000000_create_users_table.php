@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->string('role')->default('user')->comment('Define o tipo de usuário -> Admin/User');
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

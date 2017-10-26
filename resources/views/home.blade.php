@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in!
+                    Your session token is {{session('google_user_token')}}
                 </div>
             </div>
         </div>

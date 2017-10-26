@@ -29,8 +29,9 @@ class GoogleController extends Controller
         $google_user = Socialite::driver('google')->user();
         $google_user_email = $google_user->getEmail(); // unique google user email
         $google_user_name = $google_user->getName(); // google user name
-        $google_user_avatar = $google_user->getAvatar(); // google user avatar
-        
+        $google_user_avatar = $google_user->avatar; // google user avatar size 50px
+        $google_user_avatar_original = $google_user->avatar_original; // google user avatar original size
+        $google_user_token = $google_user->token;
         //dd($google_user);
         
         $user = User::where('email', $google_user_email)->first();
@@ -40,12 +41,15 @@ class GoogleController extends Controller
             $user = new User;
             $user->name = $google_user_name;
             $user->email = $google_user_email;
-            $user->avatar = $google_user_avatar;
             $user->save();
         }
 
         // login
         Auth::loginUsingId($user->id);
+
+        session(['google_user_token' => $google_user_token]);
+        session(['google_user_avatar' => $google_user_avatar]);
+        session(['google_user_avatar_original' => $google_user_avatar_original]);
 
         return redirect('home');
         // $user->token;

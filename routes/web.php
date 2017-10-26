@@ -22,3 +22,6 @@ Route::get('auth/google/callback', 'Auth\GoogleController@handleProviderCallback
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/profile', 'ProfileController@index')->name('user.profile');
+

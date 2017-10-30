@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // Autenticação com o Google
@@ -23,5 +23,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/profile', 'ProfileController@index')->name('user.profile');
+Route::get('/profile/{username}', 'ProfileController@index')->name('user.profile');
 

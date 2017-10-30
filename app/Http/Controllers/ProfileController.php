@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -21,8 +22,14 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('user.profile');
+        if($id != null) {
+            $user = User::find($id);
+        } else {
+            $user = User::find(Auth::user()->id);
+        }
+        $user = User::find($id);
+        return view('user.profile')->with(compact('user'));
     }
 }

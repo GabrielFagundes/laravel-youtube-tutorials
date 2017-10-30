@@ -7,7 +7,7 @@
         <div class="overlay"></div>
         <div class="container">
             <div class="hero-block">
-                <h5>{{ Auth::user()->name }}</h5>
+                <h5>{{ $user->name }}</h5>
                 <a class="btn btn-primary btn-sm btn-shadow btn-rounded btn-icon btn-add" href="#" data-toggle="tooltip" title="Add friend" role="button"><i class="fa fa-user-plus"></i></a>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="sticky">
                     <a href="#"><img src="img/user/avatar-sm.jpg" alt=""></a>
                     <div class="profile-info">
-                        <h5>{{ Auth::user()->name }}</h5>
+                        <h5>{{ $user->name }}</h5>
                         <span>@nathan</span>
                     </div>
                 </div>
@@ -45,6 +45,28 @@
                 <li><a href="#">Groups</a></li>
                 <li><a href="#">Forums</a></li>
             </ul>
+        </div>
+    </section>
+
+    <section class="p-y-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 hidden-md-down">
+
+                    <!-- widget about -->
+                    <div class="widget widget-about">
+                        <h5 class="widget-title">About Me</h5>
+                        <p>I am a frontend developer &amp; web designer. I love to work on creative and standalone projects like gameforest.</p>
+                        <ul>
+                            <li><i class="fa fa-clock-o"></i> Joined December 2009</li>
+                            <li><i class="fa fa-map-marker"></i> United Kingdom</li>
+                            <li><a href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730" target="_blank"><i class="fa fa-chain-broken"></i> Gameforest</a></li>
+                            <li><a href="https://www.facebook.com/yakuthemes" target="_blank"><i class="fa fa-facebook"></i> yakuthemes</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </section>
 

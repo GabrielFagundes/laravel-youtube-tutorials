@@ -41,15 +41,23 @@ class GoogleController extends Controller
             $user = new User;
             $user->name = $google_user_name;
             $user->email = $google_user_email;
+            $user->avatar = $google_user_avatar_original;
             $user->save();
+        }
+        else {
+            //switch avatar if there's a new url
+            $existing_user = User::find($user->id);
+            if ($existing_user->avatar <> $google_user_avatar_original){
+                $existing_user->avatar = $google_user_avatar_original;
+                $existing_user->save();
+            }
         }
 
         // login
         Auth::loginUsingId($user->id);
-
         session(['google_user_token' => $google_user_token]);
         session(['google_user_avatar' => $google_user_avatar]);
-        session(['google_user_avatar_original' => $google_user_avatar_original]);
+        //session(['google_user_avatar_original' => $google_user_avatar_original]);
 
         return redirect('home');
         // $user->token;

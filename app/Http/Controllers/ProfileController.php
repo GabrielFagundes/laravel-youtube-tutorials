@@ -30,6 +30,17 @@ class ProfileController extends Controller
             $user = User::find(Auth::user()->id);
         }
         $user = User::find($id);
-        return view('user.profile')->with(compact('user'));
+        return view('user.profile.complete')->with(compact('user'));
     }
+
+    public function update(){
+
+
+
+    }
+
+public function complete(){
+        return view('user.complete');
+    }
+
 }

@@ -664,8 +664,8 @@ img {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.4);
   padding: 65px 0 20px 0;
-  width: 100%;
   bottom: 0;
+  position: absolute;
 }
 
 #footer .footer-title {

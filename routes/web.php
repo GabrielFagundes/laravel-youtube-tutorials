@@ -11,17 +11,20 @@
 |
 */
 
+// standard routes
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('home');
 });
 
-// Autenticação com o Google
+// Google auth routes
 Route::get('auth/google', 'Auth\GoogleController@redirectToProvider')->name('google.auth');
 Route::get('auth/google/callback', 'Auth\GoogleController@handleProviderCallback');
 
+// authentication routes
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/profile/{username}', 'ProfileController@index')->name('user.profile');
-
+// profile routes
+Route::get('/profile/{username}', 'ProfileController@index')->name('profile.index');
+Route::get('/profile/complete', 'ProfileController@complete')->name('profile.complete');
+Route::get('/profile/update', 'ProfileController@create')->name('profile.update');

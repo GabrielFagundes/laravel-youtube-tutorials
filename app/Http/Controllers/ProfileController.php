@@ -41,8 +41,24 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request){
-        dd($request);
-        $user->city = $request->city;
+        //dd($request->city);
+        $validatedData = $request->validate([
+            'city'        => 'max:50',
+            'facebook'    => 'max:50',
+            'twitch'      => 'max:50',
+            'youtube'     => 'max:50',
+            'twitter'     => 'max:50',
+            'description' => 'max:200',
+        ]);
+        $user = User::findOrFail(Auth::user()->id);
+        $user->city =        $request->city;
+        $user->facebook =    $request->facebook;
+        $user->twitch =      $request->twitch;
+        $user->youtube =     $request->youtube;
+        $user->twitter =     $request->twitter;
+        $user->description = $request->description;
+        $user->save();
+        echo 'deu certo';
     }
 
     public function teste(){

@@ -25,6 +25,7 @@ Route::get('auth/google/callback', 'Auth\GoogleController@handleProviderCallback
 Auth::routes();
 
 // profile routes
-Route::get('/profile/{username}', 'ProfileController@index')->name('profile.index');
-Route::get('/profile/complete', 'ProfileController@complete')->name('profile.complete');
-Route::get('/profile/update', 'ProfileController@create')->name('profile.update');
+Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
+Route::get('/completeprofile', 'ProfileController@complete')->name('profile.complete');
+Route::post('/completeprofile', 'ProfileController@update')->name('profile.update');
+Route::get('/teste', 'ProfileController@teste');

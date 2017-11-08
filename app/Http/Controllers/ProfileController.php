@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -22,25 +23,30 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function show($id)
     {
+        dd($id);
         if($id != null) {
             $user = User::find($id);
         } else {
             $user = User::find(Auth::user()->id);
         }
-        $user = User::find($id);
         return view('user.profile.complete')->with(compact('user'));
     }
 
-    public function update(){
-
-
-
+    public function complete(){
+        $user = User::find(Auth::user()->id);
+        //dd($user);
+        return view('user.profile.complete')->with(compact('user'));
     }
 
-public function complete(){
-        return view('user.complete');
+    public function update(Request $request){
+        dd($request);
+        $user->city = $request->city;
+    }
+
+    public function teste(){
+        echo 'Teste';
     }
 
 }

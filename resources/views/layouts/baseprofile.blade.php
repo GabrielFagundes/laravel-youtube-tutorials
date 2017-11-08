@@ -90,7 +90,7 @@
 <section class="toolbar toolbar-profile" data-fixed="true">
     <div class="container">
         <div class="profile-avatar">
-            <a href="#"><img src="{{$user->avatar}}" alt=""></a>
+            <a href="#"><img src="{{ $user->avatar }}" alt=""></a>
             <div class="sticky">
                 <a href="#"><img src="img/user/avatar-sm.jpg" alt=""></a>
                 <div class="profile-info">

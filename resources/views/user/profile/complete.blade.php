@@ -11,7 +11,7 @@
             </p>
             <div class="row m-t-30">
                 <div class="col-lg-9 mx-auto">
-                    <form method="post">
+                    <form method="POST" action="{{ route('profile.update') }}">
                         {{csrf_field()}}
                         <div class="alert alert-success alert-dismissible" hidden role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -21,32 +21,32 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Localização</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            <input id="city" name="city" type="text" class="form-control" placeholder="Enter your email">
                             <small class="form-text">Cidade e Estado onde você mora. Ex: Porto Alegre - RS.</small>
                         </div>
                         <div class="form-group">
                             <label for="name"><i class="fa fa-facebook"></i> Facebook</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            <input id="facebook" name="facebook" type="text" class="form-control" placeholder="Enter your name">
                             <small class="form-text">O link do seu perfil no Facebook.</small>
                         </div>
                         <div class="form-group">
                             <label for="name"><i class="fa fa-twitch"></i> Twitch</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            <input id="twitch" name="twitch" type="text" class="form-control" placeholder="Enter your name">
                             <small class="form-text">O link do seu canal na Twitch.</small>
                         </div>
                         <div class="form-group">
                             <label for="name"><i class="fa fa-youtube"></i> Youtube</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            <input id="youtube" name="youtube" type="text" class="form-control" placeholder="Enter your name">
                             <small class="form-text">O link do seu canal no Youtube.</small>
                         </div>
                         <div class="form-group">
                             <label for="name"><i class="fa fa-twitter"></i> Twitter</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            <input id="twitter" name="twitter" type="text" class="form-control" placeholder="Enter your name">
                             <small class="form-text">O link do seu perfil no Twitter.</small>
                         </div>
                         <div class="form-group">
                             <label for="message">Bio</label>
-                            <textarea class="form-control" maxlength="100" rows="4" placeholder="Your message"></textarea>
+                            <textarea id="description" name="description" class="form-control" maxlength="100" rows="4" placeholder="Your message"></textarea>
                             <small class="form-text">Conte um pouco sobre você. Vai aparecer na sua descrição à esquerda.</small>
                         </div>
                         <button type="submit" class="btn btn-primary btn-shadow">Submit</button>

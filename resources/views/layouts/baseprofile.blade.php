@@ -127,13 +127,24 @@
             <div class="col-lg-3 hidden-md-down">
                 <!-- widget about -->
                 <div class="widget widget-about">
-                    <h5 class="widget-title">About Me</h5>
-                    <p>I am a frontend developer &amp; web designer. I love to work on creative and standalone projects like gameforest.</p>
+                    <h5 class="widget-title">Bio</h5>
+                    <p>{{ $user->description }}</p>
                     <ul>
-                        <li><i class="fa fa-clock-o"></i> Joined December 2009</li>
-                        <li><i class="fa fa-map-marker"></i> United Kingdom</li>
-                        <li><a href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730" target="_blank"><i class="fa fa-chain-broken"></i> Gameforest</a></li>
-                        <li><a href="https://www.facebook.com/yakuthemes" target="_blank"><i class="fa fa-facebook"></i> yakuthemes</a></li>
+                        @if($user->city)
+                            <li><i class="fa fa-map-marker"></i> {{ $user->city }} </li>
+                        @endif
+                        @if($user->facebook)
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook"></i> {{ $user->name }} </a></li>
+                        @endif
+                        @if($user->twitch)
+                            <li><a href="#" target="_blank"><i class="fa fa-twitch"></i> tutos </a></li>
+                        @endif
+                        @if($user->youtube)
+                            <li><a href="#" target="_blank"><i class="fa fa-youtube-play"></i> tutos </a></li>
+                        @endif
+                        @if($user->twitter)
+                            <li><a href="#" target="_blank"><i class="fa fa-twitter"></i> tutos </a></li>
+                        @endif
                     </ul>
                 </div>
 

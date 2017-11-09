@@ -25,7 +25,6 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        dd($id);
         if($id != null) {
             $user = User::find($id);
         } else {

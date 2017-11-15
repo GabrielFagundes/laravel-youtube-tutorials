@@ -28,4 +28,3 @@ Auth::routes();
 Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
 Route::get('/completeprofile', 'ProfileController@complete')->name('profile.complete');
 Route::post('/completeprofile', 'ProfileController@update')->name('profile.update');
-Route::get('/teste', 'ProfileController@teste');

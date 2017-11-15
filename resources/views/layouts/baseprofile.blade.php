@@ -81,7 +81,7 @@
     <div class="container">
         <div class="hero-block">
             <h5>{{ $user->name }}</h5>
-            <a class="btn btn-primary btn-sm btn-shadow btn-rounded btn-icon btn-add" href="#" data-toggle="tooltip" title="Completar dados" role="button"><i class="fa fa-user-plus"></i>&nbsp; Complete seus dados</a>
+            <a class="btn btn-primary btn-sm btn-shadow btn-rounded btn-icon btn-add" href="{{ route('profile.update') }}" data-toggle="tooltip" title="Completar dados" role="button"><i class="fa fa-user-plus"></i>&nbsp; Complete seus dados</a>
         </div>
     </div>
 </section>
@@ -134,16 +134,16 @@
                             <li><i class="fa fa-map-marker"></i> {{ $user->city }} </li>
                         @endif
                         @if($user->facebook)
-                            <li><a href="#" target="_blank"><i class="fa fa-facebook"></i> {{ $user->name }} </a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook"></i> {{ $user->facebook }} </a></li>
                         @endif
                         @if($user->twitch)
-                            <li><a href="#" target="_blank"><i class="fa fa-twitch"></i> tutos </a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-twitch"></i> {{ $user->twitch }} </a></li>
                         @endif
                         @if($user->youtube)
-                            <li><a href="#" target="_blank"><i class="fa fa-youtube-play"></i> tutos </a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-youtube-play"></i> {{ $user->youtube }} </a></li>
                         @endif
                         @if($user->twitter)
-                            <li><a href="#" target="_blank"><i class="fa fa-twitter"></i> tutos </a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-twitter"></i> {{ $user->twitter }} </a></li>
                         @endif
                     </ul>
                 </div>

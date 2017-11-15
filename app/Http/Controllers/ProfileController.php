@@ -57,7 +57,7 @@ class ProfileController extends Controller
         $user->twitter =     $request->twitter;
         $user->description = $request->description;
         $user->save();
-        echo 'deu certo';
+        return view('user.profile.complete')->with(compact('user'));
     }
 
     public function teste(){

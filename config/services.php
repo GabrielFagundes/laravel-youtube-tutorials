@@ -36,9 +36,9 @@ return [
     ],
 
     'google' => [
-        'client_id' => '141920078449-fo9hln6u1c6gfet1adqfbp1pju0muedf.apps.googleusercontent.com',
-        'client_secret' => 'lnRACgdGoSwQmfFOEwByv3um',
-        'redirect' => 'http://tutoriube.dev/auth/google/callback',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_APP_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT')
 ],
 
 ];

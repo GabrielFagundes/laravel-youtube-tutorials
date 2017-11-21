@@ -37,8 +37,8 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li class="hidden-xs-down">
-                            <a class="btn btn-primary" href="{{ route('google.auth') }}">
-                                Login com Google
+                            <a class="btn btn-social btn-youtube btn-icon-left" href="{{ route('google.auth') }}" role="button"><i class="fa fa-youtube"></i>
+                                Login
                             </a>
                         </li>
                     @else

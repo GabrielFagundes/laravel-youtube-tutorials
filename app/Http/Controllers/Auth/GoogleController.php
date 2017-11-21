@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Socialite;
+use Google_Client;
+use Google_Service_Youtube;
 
 class GoogleController extends Controller
 {
@@ -16,11 +18,13 @@ class GoogleController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->scopes(['openid', 'profile', 'email', Google_Service_Youtube::YOUTUBE_FORCE_SSL])
+            ->redirect();
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from Google.
      *
      * @return Response
      */
@@ -33,7 +37,23 @@ class GoogleController extends Controller
         $google_user_avatar_original = $google_user->avatar_original; // google user avatar original size
         $google_user_token = $google_user->token;
         //dd($google_user);
-        
+
+
+        // transforma os tokens recebido pelo socialite para utilização com o client do google
+        // este client será utilizado para acessar, na sequencia, o client responsavel pelas requisições à api do youtube
+        $google_client_token = [
+            'access_token' => $google_user->token,
+            'refresh_token' => $google_user->refreshToken,
+            'expires_in' => $google_user->expiresIn
+        ];
+
+        $client = new Google_Client();
+        $client->setApplicationName("e-dandodicas");
+        $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
+        $client->setAccessToken(json_encode($google_client_token));
+
+        $this->returnUploadedVideos($client);
+
         $user = User::where('email', $google_user_email)->first();
 
         // register (if no user)
@@ -61,5 +81,20 @@ class GoogleController extends Controller
 
         return redirect('home');
         // $user->token;
+    }
+
+    public function returnUploadedVideos($client){
+
+        // Define an object that will be used to make all API requests.
+        $youtube = new Google_Service_YouTube($client);
+
+        if ($client->getAccessToken()){
+            $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
+                'mine' => 'true',
+            ));
+            dd($channelsResponse);
+        }
+
+
     }
 }

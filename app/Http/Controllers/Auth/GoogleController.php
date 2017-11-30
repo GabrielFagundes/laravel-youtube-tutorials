@@ -47,13 +47,6 @@ class GoogleController extends Controller
             'expires_in' => $google_user->expiresIn
         ];
 
-        $client = new Google_Client();
-        $client->setApplicationName("e-dandodicas");
-        $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
-        $client->setAccessToken(json_encode($google_client_token));
-
-        $this->returnUploadedVideos($client);
-
         $user = User::where('email', $google_user_email)->first();
 
         // register (if no user)
@@ -73,28 +66,20 @@ class GoogleController extends Controller
             }
         }
 
+        //cria o client de acesso do google para armazenar na sessão, ele será utilizado em todas as requisições
+        $client = new Google_Client();
+        $client->setApplicationName("e-dandodicas");
+        $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
+        $client->setAccessToken(json_encode($google_client_token));
+
         // login
         Auth::loginUsingId($user->id);
         session(['google_user_token' => $google_user_token]);
         session(['google_user_avatar' => $google_user_avatar]);
+        session(['google_client' => $client]);
         //session(['google_user_avatar_original' => $google_user_avatar_original]);
 
         return redirect('home');
         // $user->token;
-    }
-
-    public function returnUploadedVideos($client){
-
-        // Define an object that will be used to make all API requests.
-        $youtube = new Google_Service_YouTube($client);
-
-        if ($client->getAccessToken()){
-            $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
-                'mine' => 'true',
-            ));
-            dd($channelsResponse);
-        }
-
-
     }
 }

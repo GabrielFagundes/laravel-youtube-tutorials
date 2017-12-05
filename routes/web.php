@@ -29,6 +29,7 @@ Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
 Route::get('/completeprofile', 'ProfileController@complete')->name('profile.complete');
 Route::post('/completeprofile', 'ProfileController@update')->name('profile.update');
 
-Route::get('/tutorial/upload', 'TutorialController@upload')->name('tutorial.upload');
+Route::get('/tutorial/upload', 'TutorialController@show')->name('tutorial.show');
+
 
 

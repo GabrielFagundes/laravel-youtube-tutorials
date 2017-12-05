@@ -17,10 +17,9 @@ class TutorialController extends Controller
         $this->middleware('auth');
     }
 
-    public function upload(){
-
+    public function show(){
         $youtube = new Youtube;
-        $youtube->returnUploadedVideos();
-
+        $uploadedVideos = $youtube->returnUploadedVideos();
+        return view('upload')->with(compact('uploadedVideos'));
     }
 }

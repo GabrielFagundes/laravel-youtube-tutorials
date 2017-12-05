@@ -30,12 +30,14 @@ class Youtube
                     'maxResults' => 50
                 ));
 
-                foreach ($playlistItemsResponse['items'] as $item) {
-                    echo $item->getSnippet()->getResourceId()->getVideoId();
-                    echo '<img src=' . $item->getSnippet()->getThumbnails()->getMedium()->getUrl() . '></img>';
-                }
-                dd($playlistItemsResponse);
-                //$playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
+                return $playlistItemsResponse;
+
+//               foreach ($playlistItemsResponse['items'] as $item) {
+//                    echo $item->getSnippet()->getResourceId()->getVideoId();
+//                    echo '<img src=' . $item->getSnippet()->getThumbnails()->getMedium()->getUrl() . '></img>';
+//                }
+//                dd($playlistItemsResponse);
+//                $playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
             }
         }
     }

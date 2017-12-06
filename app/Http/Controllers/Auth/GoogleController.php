@@ -71,6 +71,7 @@ class GoogleController extends Controller
         $client->setApplicationName("e-dandodicas");
         $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
         $client->setAccessToken(json_encode($google_client_token));
+        $client->setAccessType('offline');
 
         // login
         Auth::loginUsingId($user->id);

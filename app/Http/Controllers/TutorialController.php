@@ -20,6 +20,7 @@ class TutorialController extends Controller
     public function show(){
         $youtube = new Youtube;
         $uploadedVideos = $youtube->returnUploadedVideos();
-        return view('upload')->with(compact('uploadedVideos'));
+        $videoContents = $youtube->returnVideoContent($uploadedVideos);
+        return view('upload')->with(compact('uploadedVideos', 'videoContents'));
     }
 }

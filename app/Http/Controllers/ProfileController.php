@@ -60,8 +60,4 @@ class ProfileController extends Controller
         return view('user.profile.complete')->with(compact('user'));
     }
 
-    public function teste(){
-        echo 'Teste';
-    }
-
 }

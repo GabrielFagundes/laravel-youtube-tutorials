@@ -32,6 +32,6 @@ Route::post('/completeprofile', 'ProfileController@update')->name('profile.updat
 // tutorials routes
 Route::get('/tutorial/upload', 'TutorialController@show')->name('tutorial.show');
 Route::get('/tutorial/upload/{videoid}', 'TutorialController@upload')->name('tutorial.upload');
-Route::get('/tutorial/upload/save', 'TutorialController@save')->name('tutorial.save');
+Route::post('/tutorial/upload/save', 'TutorialController@save')->name('tutorial.save');
 
 

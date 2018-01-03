@@ -15,8 +15,9 @@ class CreateTutorialsTable extends Migration
     {
         Schema::create('tutorials', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('link');
+            $table->string('link')->unique();
             $table->string('approved')->default('N');
+            $table->string('title');
             $table->string('description');
             $table->timestamps();
         });

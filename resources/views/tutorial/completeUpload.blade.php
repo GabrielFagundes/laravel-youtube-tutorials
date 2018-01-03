@@ -9,8 +9,8 @@
                 <input type="text" id="video" name="video" value="{{$video}}" hidden>
 
                 <div class="form-group">
-                    <label for="titulo"><i class="fa fa-youtube"></i> Título</label>
-                    <input type="text" id="titulo" name="titulo" class="form-control">
+                    <label for="title"><i class="fa fa-youtube"></i> Título</label>
+                    <input type="text" id="title" name="title" class="form-control">
                     </input>
                     <small class="form-text">Este seráo título do vídeo que as pessoas visualizarão na tela inicial e no seu perfil.</small>
                 </div>
@@ -21,6 +21,8 @@
                     </textarea>
                     <small class="form-text">Esta descrição aparecerá abaixo do vídeo na tela do tutorial.</small>
                 </div>
+
+                <button type="submit" class="btn btn-primary btn-shadow"><i class="fa fa-upload"></i> Upload</button>
             </form>
 
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tutorial;
 use Illuminate\Http\Request;
 use App\Youtube;
 
@@ -29,11 +30,28 @@ class TutorialController extends Controller
         return view('tutorial.completeupload')->with(compact('video'));
     }
 
-    public function save(){
+    public function save(Request $request){
 
+        $validatedData = $request->validate([
+            'titulo'        => 'required|max:20',
+            'description'   => 'required|max:1000',
+            'link'          => 'required|unique:tutorials|max:30',
+        ]);
 
+        $tutorial = Tutorial::where('link', $request->video)->first();
 
+        if (!$tutorial){
+            $tutorial = new Tutorial;
+            $tutorial->title = $request->title;
+            $tutorial->description = $request->description;
+            $tutorial->link = $request->video;
+            $tutorial->save();
+        }
+        else {
+            $erro = true;
+        }
+
+        return redirect('home');
     }
-
 
 }

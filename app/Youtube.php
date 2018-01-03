@@ -39,7 +39,7 @@ class Youtube
 
 //                dd($playlistItemsResponse->getSnippet()->getPublishedAt());
 //                $playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
-
+//                dd($playlistItemsResponse->getItems()->getSnippet()->getResourceId()->getVideoId());
                 return $playlistItemsResponse;
             }
         }

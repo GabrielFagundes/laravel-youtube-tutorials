@@ -21,6 +21,19 @@ class TutorialController extends Controller
         $youtube = new Youtube;
         $uploadedVideos = $youtube->returnUploadedVideos();
         $videoContents = $youtube->returnVideoContent($uploadedVideos);
-        return view('upload')->with(compact('uploadedVideos', 'videoContents'));
+        return view('tutorial.upload')->with(compact('uploadedVideos', 'videoContents'));
     }
+
+    public function upload($videoid){
+        $video = $videoid;
+        return view('tutorial.completeupload')->with(compact('video'));
+    }
+
+    public function save(){
+
+
+
+    }
+
+
 }

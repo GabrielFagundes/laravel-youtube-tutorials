@@ -38,18 +38,18 @@
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card card-video">
                             <div class="card-img upload">
-                                <a href="video-post.html">
+                                <a href="{{url('/tutorial/upload/' . $video->getSnippet()->getResourceId()->getVideoId())}}">
                                     <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Thumbnail indisponível">
                                 </a>
-                                <div class="card-meta">
-                                    <span>{{ $videoContents['duration'] }}</span>
-                                </div>
+                                {{--<div class="card-meta">--}}
+                                    {{--<span>{{ $videoContents['duration'] }}</span>--}}
+                                {{--</div>--}}
                             </div>
                             <div class="card-block">
-                                <h4 class="card-title" ><a href="video-post.html">{{ $video->getSnippet()->getTitle() }}</a></h4>
+                                <h4 class="card-title" ><a href="">{{ $video->getSnippet()->getTitle() }}</a></h4>
                                 <div class="card-meta">
-                                    <span><i class="fa fa-clock-o"></i> {{ date("U",strtotime($video->getSnippet()->getPublishedAt() ))}} </span>
-                                    <span> {{ $videoContents['viewCount'] }} views</span>
+                                    {{--<span><i class="fa fa-clock-o"></i> {{ date("U",strtotime($video->getSnippet()->getPublishedAt() ))}} </span>--}}
+                                    {{--<span> {{ $videoContents['viewCount'] }} views</span>--}}
                                 </div>
                                 <p> {{ $video->getSnippet()->getDescription()  }}</p>
                             </div>

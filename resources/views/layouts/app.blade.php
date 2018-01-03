@@ -28,7 +28,7 @@
             <div class="navbar">
                 <div class="navbar-left">
                     <a class="navbar-toggle"><i class="fa fa-bars"></i></a>
-                    <a href="{{ url('/home') }}" class="logo"><img src="../img/logo.png" alt="Tutoriube - eSports Tutorials Center"></a>
+                    <a href="{{ url('/home') }}" class="logo"><img src="/../img/logo.png" alt="Tutoriube - eSports Tutorials Center"></a>
                     <nav class="nav">
 
                     </nav>
@@ -44,7 +44,6 @@
                     @else
                         <li class="dropdown dropdown-profile">
                             <a href="login.html" data-toggle="dropdown"><img src="{{session('google_user_avatar')}}" alt="">
-                                <span>{{ Auth::user()->name }}</span></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="{{  url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Profile</a>
                                 <a class="dropdown-item" href="#"><i class="fa fa-envelope-open"></i> Inbox</a>

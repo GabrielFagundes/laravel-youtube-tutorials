@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Subcategory;
 use App\Tutorial;
 use Illuminate\Http\Request;
 use App\Youtube;
+use Illuminate\Support\Facades\Auth;
 
 class TutorialController extends Controller
 {
@@ -27,16 +30,19 @@ class TutorialController extends Controller
 
     public function upload($videoid){
         $video = $videoid;
-        return view('tutorial.completeupload')->with(compact('video'));
+        $categories = Category::all();
+        $subcategories = Subcategory::all();
+        return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories'));
     }
 
     public function save(Request $request){
 
-        $validatedData = $request->validate([
-            'titulo'        => 'required|max:20',
-            'description'   => 'required|max:1000',
-            'link'          => 'required|unique:tutorials|max:30',
-        ]);
+        //echo 'teste'; exit;
+//
+//        $validatedData = $request->validate([
+//            'titulo'        => 'required|max:20',
+//            'description'   => 'required|max:1000',
+//        ]);
 
         $tutorial = Tutorial::where('link', $request->video)->first();
 
@@ -45,9 +51,15 @@ class TutorialController extends Controller
             $tutorial->title = $request->title;
             $tutorial->description = $request->description;
             $tutorial->link = $request->video;
+            $tutorial->category_id = $request->category;
+            $tutorial->subcategory_id = $request->subcategory;
+            $tutorial->user = Auth::user()->id;
+
             $tutorial->save();
         }
         else {
+            echo 'erro';
+            exit;
             $erro = true;
         }
 

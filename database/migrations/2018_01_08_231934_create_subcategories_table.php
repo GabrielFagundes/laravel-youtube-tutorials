@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTutorialsTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateTutorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tutorials', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('link')->unique();
-            $table->string('approved')->default('N');
-            $table->string('title');
             $table->string('description');
-            $table->string('user');
-            $table->integer('category_id')->unsigned();
-            $table->integer('subcategory_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreateTutorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tutorials');
+        Schema::dropIfExists('subcategories');
     }
 }

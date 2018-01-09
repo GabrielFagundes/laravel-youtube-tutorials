@@ -22,7 +22,25 @@
                     <small class="form-text">Esta descrição aparecerá abaixo do vídeo na tela do tutorial.</small>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-shadow"><i class="fa fa-upload"></i> Upload</button>
+                <div class="form-group">
+                    <label for="category">Jogo a que se refere o tutorial</label>
+                    <select id="category" name="category" class="form-control">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->description }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="subcategory">Nível do tutorial</label>
+                    <select id="subcategory" name="subcategory" class="form-control">
+                        @foreach($subcategories as $subcategory)
+                            <option value="{{ $subcategory->id }}">{{ $subcategory->description }}</option>
+                        @endforeach
+                    </select>
+                </div><br>
+
+            <button type="submit" class="btn btn-primary btn-shadow"><i class="fa fa-upload"></i> Upload</button>
             </form>
 
         </div>

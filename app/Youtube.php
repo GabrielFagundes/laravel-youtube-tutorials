@@ -45,7 +45,7 @@ class Youtube
         }
     }
 
-    public function returnVideoContent($uploadedVideos){
+    public function returnVideoContent(){
 
         /////////////////////////////////////
         $client = session('google_client');
@@ -54,33 +54,31 @@ class Youtube
         //Ajustar
         /////////////////////////////////////
 
+        $tutorials = Tutorial::all();
 
-        foreach ($uploadedVideos['items'] as $item) {
-            $videoID = $item->getSnippet()->getResourceId()->getVideoId();
-            $videoResponse = $youtube->videos->listVideos('contentDetails, statistics, id', array(
-                'id' => $videoID
-            ));
-
-
-            foreach ($videoResponse['items'] as $video){
-                $durationISO = $video->getContentDetails()->getDuration();
-                $di = new \DateInterval($durationISO);
-                $string = '';
-
-                if ($di->h > 0) {
-                    $string .= $di->h.':';
-                }
-                $duration = $string.$di->i.':'.$di->s;
-                $viewCount = $video->getStatistics()->getViewCount();
-
-                $response = array(
-                    'duration' => $duration,
-                    'viewCount' => $viewCount);
-            }
-//dd($videoResponse);
-            return $response;
+        $videoIDs = '';
+        foreach ($tutorials  as $tutorial) {
+            $videoIDs = $videoIDs . $tutorial->link . ',';
         }
+            $videoResponse = $youtube->videos->listVideos('contentDetails, statistics, snippet, id', array(
+                'id' => $videoIDs));
 
-    }
-
+//            foreach ($videoResponse['items'] as $video){
+//                $durationISO = $video->getContentDetails()->getDuration();
+//                $di = new \DateInterval($durationISO);
+//                $string = '';
+//
+//                if ($di->h > 0) {
+//                    $string .= $di->h.':';
+//                }
+//                $duration = $string.$di->i.':'.$di->s;
+//                $viewCount = $video->getStatistics()->getViewCount();
+//
+//                $response = array(
+//                    'duration' => $duration,
+//                    'viewCount' => $viewCount);
+//            }
+//dd($videoResponse);
+            return $videoResponse;
+        }
 }

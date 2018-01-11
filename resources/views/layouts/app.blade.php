@@ -33,6 +33,7 @@
 
                     </nav>
                 </div>
+
                 <div class="nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
@@ -58,15 +59,18 @@
                             </div>
                         </li>
                         @endif
+                    <ul>
+                        <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="navbar-search">
-                <div class="container">
-                    <form method="post">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <i class="fa fa-times close"></i>
-                    </form>
-                </div>
+        </div>
+        <div class="navbar-search">
+            <div class="container">
+                <form method="post">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <i class="fa fa-times close"></i>
+                </form>
             </div>
         </div>
     </div>
@@ -87,7 +91,27 @@
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
+<!-- script search -->
+<!-- plugins js -->
+<script>
+    (function($) {
+        "use strict";
+        $('.search-video, .navbar-search .form-control').keyup(function() {
+            var search = $(this).val().toLowerCase();
+            $.each($('.card-title'), function() {
+                if ($(this).text().toLowerCase().indexOf(search) === -1) {
+                    $(this).parent().parent().parent().hide();
+                } else {
+                    $(this).parent().parent().parent().show();
+                }
+            });
+        });
+    })(jQuery);
+</script>
+
+
 <!-- theme js -->
 <script src="{{ asset('js/theme.min.js') }}"></script>
+
 </body>
 </html>

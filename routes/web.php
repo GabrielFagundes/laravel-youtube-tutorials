@@ -13,9 +13,7 @@
 
 // standard routes
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 // Google auth routes
 Route::get('auth/google', 'Auth\GoogleController@redirectToProvider')->name('google.auth');
@@ -24,6 +22,10 @@ Route::get('auth/google/callback', 'Auth\GoogleController@handleProviderCallback
 // authentication routes
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return view('home');
+});
 // profile routes
 Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
 Route::get('/completeprofile', 'ProfileController@complete')->name('profile.complete');

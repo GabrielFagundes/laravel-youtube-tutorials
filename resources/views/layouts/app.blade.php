@@ -86,32 +86,14 @@
 <!-- /footer -->
 
 <!-- Scripts -->
-@yield('footer')
 <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-<!-- script search -->
-<!-- plugins js -->
-<script>
-    (function($) {
-        "use strict";
-        $('.search-video, .navbar-search .form-control').keyup(function() {
-            var search = $(this).val().toLowerCase();
-            $.each($('.card-title'), function() {
-                if ($(this).text().toLowerCase().indexOf(search) === -1) {
-                    $(this).parent().parent().parent().hide();
-                } else {
-                    $(this).parent().parent().parent().show();
-                }
-            });
-        });
-    })(jQuery);
-</script>
-
+@yield('scripts')
 
 <!-- theme js -->
-<script src="{{ asset('js/theme.min.js') }}"></script>
+<script src="{{ asset('js/theme.js') }}"></script>
 
 </body>
 </html>

@@ -67,6 +67,7 @@ class GoogleController extends Controller
         }
 
         //cria o client de acesso do google para armazenar na sessão, ele será utilizado em todas as requisições
+        //realizadas pelo usuário logado
         $client = new Google_Client();
         $client->setApplicationName("e-dandodicas");
         $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));

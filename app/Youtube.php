@@ -47,8 +47,19 @@ class Youtube
 
     public function returnVideoContent(){
 
+
+
         /////////////////////////////////////
-        $client = session('google_client');
+//        $client = session('google_client');
+
+        $client = new \Google_Client();
+        $client->setClientId(env('GOOGLE_CLIENT_ID'));
+        $client->setClientSecret(env('GOOGLE_APP_SECRET'));
+        $client->setRedirectUri(env('GOOGLE_REDIRECT_NOUSER'));
+        $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
+        $client->setScopes('https://www.googleapis.com/auth/youtube');
+//        dd($client);
+
         $youtube = new Google_Service_YouTube($client);
         // Define an object that will be used to make all API requests.
         //Ajustar

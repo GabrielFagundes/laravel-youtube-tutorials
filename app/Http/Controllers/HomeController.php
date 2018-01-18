@@ -28,6 +28,7 @@ class HomeController extends Controller
         $youtube = new Youtube();
         $tutorials = Tutorial::all();
         $videos = $youtube->returnVideoContent();
+//        dd($videos);
 
         return view('home')->with(compact('tutorials', 'videos'));
     }

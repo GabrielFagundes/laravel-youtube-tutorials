@@ -18,24 +18,34 @@ class TutorialController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
-    public function show(){
+    public function show($videoId){
+
+        $tutorial = Tutorial::where('link', $videoId)->first();
+//        dd($tutorial->link);
+//
+        return view('tutorial.post')->with(compact('tutorial'));
+    }
+
+    public function uploadIndex(){
         $youtube = new Youtube;
         $uploadedVideos = $youtube->returnUploadedVideos();
         $videoContents = $youtube->returnVideoContent($uploadedVideos);
+
         return view('tutorial.upload')->with(compact('uploadedVideos', 'videoContents'));
     }
 
-    public function upload($videoid){
+    public function uploadCreate($videoid){
         $video = $videoid;
         $categories = Category::all();
         $subcategories = Subcategory::all();
+
         return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories'));
     }
 
-    public function save(Request $request){
+    public function uploadSubmit(Request $request){
 
         //echo 'teste'; exit;
 //

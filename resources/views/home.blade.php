@@ -177,12 +177,12 @@
                                 </div>
                             </div>
                             <div class="card-block">
-                                <h4 class="card-title"><a href="video-post.html">Top 5 Brutal Gameplay Moments</a></h4>
+                                <h4 class="card-title"><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ $video->getSnippet()->getTitle() }}</a></h4>
                                 <div class="card-meta">
-                                    <span><i class="fa fa-clock-o"></i> 1 month ago</span>
+                                    <span><i class="fa fa-clock-o"></i> {{ time() }}</span>
                                     <span>6521 views</span>
                                 </div>
-                                <p>Check out these 5 brutal For Honor clips shared by you.</p>
+                                <p>{{ $video->getSnippet()->getDescription() }}</p>
                             </div>
                         </div>
                     </div>

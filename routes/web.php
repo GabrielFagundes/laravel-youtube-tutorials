@@ -27,9 +27,13 @@ Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
 Route::get('/completeprofile', 'ProfileController@complete')->name('profile.complete');
 Route::post('/completeprofile', 'ProfileController@update')->name('profile.update');
 
-// tutorials routes
-Route::get('/tutorial/upload', 'TutorialController@show')->name('tutorial.show');
-Route::get('/tutorial/upload/{videoid}', 'TutorialController@upload')->name('tutorial.upload');
-Route::post('/tutorial/upload/save', 'TutorialController@save')->name('tutorial.save');
+// upload routes
 
+Route::group(['prefix' => 'tutorial/upload',  'middleware' => 'auth'], function()
+{
+    Route::get('index', 'TutorialController@uploadIndex')->name('tutorial.show');
+    Route::get('{videoid}', 'TutorialController@uploadCreate')->name('tutorial.upload');
+    Route::post('save', 'TutorialController@uploadSubmit')->name('tutorial.save');
+});
 
+Route::get('/tutorial/{videoid}', 'TutorialController@show')->name('tutorial.upload');

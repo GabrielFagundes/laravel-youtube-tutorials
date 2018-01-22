@@ -182,7 +182,7 @@
                                     <span><i class="fa fa-clock-o"></i> {{ time() }}</span>
                                     <span>6521 views</span>
                                 </div>
-                                <p>{{ $video->getSnippet()->getDescription() }}</p>
+                                <p>{{ cutString($video->getSnippet()->getDescription()) }}</p>
                             </div>
                         </div>
                     </div>

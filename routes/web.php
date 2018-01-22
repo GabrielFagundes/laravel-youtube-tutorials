@@ -14,6 +14,8 @@
 // standard routes
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
+Route::post('/home', 'HomeController@loadDataAjax');
+Route::post('/', 'HomeController@loadDataAjax');
 
 // Google auth routes
 Route::get('auth/google', 'Auth\GoogleController@redirectToProvider')->name('google.auth');

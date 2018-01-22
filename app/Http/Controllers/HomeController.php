@@ -26,10 +26,14 @@ class HomeController extends Controller
     public function index()
     {
         $youtube = new Youtube();
-        $tutorials = Tutorial::all();
+        $tutorials = Tutorial::orderBy('created_at', 'DESC')->get();
         $videos = $youtube->returnVideoContent();
-//        dd($videos);
+        //        dd($videos);
 
         return view('home')->with(compact('tutorials', 'videos'));
+    }
+
+    public function loadDataAjax(){
+
     }
 }

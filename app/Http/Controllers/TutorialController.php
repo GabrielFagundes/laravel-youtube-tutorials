@@ -63,7 +63,7 @@ class TutorialController extends Controller
             $tutorial->link = $request->video;
             $tutorial->category_id = $request->category;
             $tutorial->subcategory_id = $request->subcategory;
-            $tutorial->user = Auth::user()->id;
+            $tutorial->user_id = Auth::user()->id;
 
             $tutorial->save();
         }

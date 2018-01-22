@@ -29,21 +29,17 @@
                     <div class="post post-single">
                         <div class="post-header">
                             <div>
-                                <a href="profile.html"><img src="img/user/user-3.jpg" alt=""></a>
+                                <a href="profile.html"><img src="{{ $tutorial->user->avatar }}" alt=""></a>
                             </div>
                             <div>
-                                <h2 class="post-title">Star Wars Battlefront II: Full Length Reveal Trailer</h2>
+                                <h2 class="post-title">{{ $tutorial->title }}</h2>
                                 <div class="post-meta">
-                                    <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">Clark</a></span>
+                                    <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">{{ $tutorial->user->name }}</a></span>
                                     <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
                                 </div>
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas elit ante, congue sodales orci ac, ultrices pretium lectus. Maecenas lorem enim, dignissim sed lacus non, feugiat iaculis lorem. Integer eu aliquet diam. Suspendisse fringilla
-                            porta justo, vel tempus risus. Ut et enim sit amet libero fermentum aliquam et ut sem.</p>
-                        <p>Maecenas viverra, mi non consectetur scelerisque, erat enim interdum erat, imperdiet elementum sapien metus a odio. Sed sapien sapien, tincidunt quis fringilla vel, eleifend tincidunt nunc. Fusce dapibus leo vestibulum, scelerisque metusnec,
-                            imperdiet tortor.usce et urna vel neque fermentum consectetur. Donec vel convallis elit. Nulla et odio a magna aliquam varius a vel ex. Cras sed dolor sapien. Sed sit amet interdum sapien, ut laoreet dui. Fusce vulputate consequat mi et
-                            rutrum.</p>
+                        {{ $tutorial->description }}
                     </div>
                     <div class="post-actions">
                         <div class="post-tags">
@@ -293,6 +289,5 @@
         </div>
     </section>
     <!-- /main -->
-
 
 @endsection

@@ -26,6 +26,9 @@ class CreateFkTutorials extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tutorials', function(Blueprint $table) {
+            $table->dropForeign(['category_id']);
+            $table->dropForeign(['subcategory_id']);
+        });
     }
 }

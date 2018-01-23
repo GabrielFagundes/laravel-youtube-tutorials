@@ -47,29 +47,22 @@ class Youtube
 
     public function returnVideoContent(){
 
+        $tutorials = Tutorial::orderBy('created_at','DESC')->limit(2)->get();
+        $videoIDs = '';
 
-
-        /////////////////////////////////////
-//        $client = session('google_client');
-
+        // Define an object that will be used to make all API requests.
         $client = new \Google_Client();
         $client->setClientId(env('GOOGLE_CLIENT_ID'));
         $client->setClientSecret(env('GOOGLE_APP_SECRET'));
         $client->setRedirectUri(env('GOOGLE_REDIRECT_NOUSER'));
         $client->setDeveloperKey(env('GOOGLE_SERVER_KEY'));
         $client->setScopes('https://www.googleapis.com/auth/youtube');
-//        dd($client);
-
         $youtube = new Google_Service_YouTube($client);
-        // Define an object that will be used to make all API requests.
-        //Ajustar
-        /////////////////////////////////////
 
-        $tutorials = Tutorial::all();
-
-        $videoIDs = '';
+        $i = 0;
         foreach ($tutorials  as $tutorial) {
             $videoIDs = $videoIDs . $tutorial->link . ',';
+            $i++;
         }
             $videoResponse = $youtube->videos->listVideos('contentDetails, statistics, snippet, id', array(
                 'id' => $videoIDs));

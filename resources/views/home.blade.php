@@ -164,31 +164,39 @@
                 <h2>Recent Videos</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
-            <div class="row row-5">
-                @foreach($videos['items'] as $video)
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="card card-video">
-                            <div class="card-img">
-                                <a href="video-post.html">
-                                    <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
-                                </a>
-                                <div class="card-meta">
-                                    <span>15:56</span>
+
+            <div id="load-data" class="row row-5">
+
+                    @foreach($videos['items'] as $video)
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="card card-video">
+                                <div class="card-img">
+                                    <a href="video-post.html">
+                                        <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
+                                    </a>
+                                    <div class="card-meta">
+                                        <span>15:56</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-block">
-                                <h4 class="card-title"><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ $video->getSnippet()->getTitle() }}</a></h4>
-                                <div class="card-meta">
-                                    <span><i class="fa fa-clock-o"></i> {{ time() }}</span>
-                                    <span>6521 views</span>
+                                <div class="card-block">
+                                    <h4 class="card-title"><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ $video->getSnippet()->getTitle() }}</a></h4>
+                                    <div class="card-meta">
+                                        <span><i class="fa fa-clock-o"></i> {{ time() }}</span>
+                                        <span>6521 views</span>
+                                    </div>
+                                    <p>{{ cutString($video->getSnippet()->getDescription()) }}</p>
                                 </div>
-                                <p>{{ cutString($video->getSnippet()->getDescription()) }}</p>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
             </div>
-            <div class="text-center"><a href="videos.html" class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20">Show More</a></div>
+            @if ($video['tutorial_id'] > 1)
+                <div id="remove-row">
+                    <center>
+                        <div id="btn-more"  data-id="{{ $video['tutorial_id'] }}"  class="text-center"><a class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20" style="color:white;">Show More</a></div>
+                    </center>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -280,6 +288,33 @@
 @endsection
 
 @section('scripts')
+
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','#btn-more',function(){
+                var id = $(this).data('id');
+                $("#btn-more").html("Loading....");
+                $.ajax({
+                    url : '{{ url("/home") }}',
+                    method : "POST",
+                    data : {id:id, _token:"{{csrf_token()}}"},
+                    dataType : "text",
+                    success : function (data)
+                    {
+                        if(data != '')
+                        {
+                            $('#remove-row').remove();
+                            $('#load-data').append(data);
+                        }
+                        else
+                        {
+                            $('#btn-more').html("No Data");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- plugins js -->
     <script src="plugins/owl-carousel/js/owl.carousel.min.js"></script>

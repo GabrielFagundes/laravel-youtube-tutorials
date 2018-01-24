@@ -45,9 +45,8 @@ class Youtube
         }
     }
 
-    public function returnVideoContent(){
+    public function returnVideoContent($tutorials){
 
-        $tutorials = Tutorial::orderBy('created_at','DESC')->limit(2)->get();
         $videoIDs = '';
 
         // Define an object that will be used to make all API requests.
@@ -67,6 +66,11 @@ class Youtube
             $videoResponse = $youtube->videos->listVideos('contentDetails, statistics, snippet, id', array(
                 'id' => $videoIDs));
 
+            foreach($videoResponse['items'] as $video){
+                if($video->id = $tutorial->link){
+                    $video['tutorial_id'] = $tutorial->id;
+                }
+            }
 //            foreach ($videoResponse['items'] as $video){
 //                $durationISO = $video->getContentDetails()->getDuration();
 //                $di = new \DateInterval($durationISO);

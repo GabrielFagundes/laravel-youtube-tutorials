@@ -36,6 +36,7 @@
                                 <div class="post-meta">
                                     <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">{{ $tutorial->user->name }}</a></span>
                                     <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
+                                    <button class="btn-youtube">Inscrever-se</button>
                                 </div>
                             </div>
                         </div>

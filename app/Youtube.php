@@ -13,13 +13,8 @@ class Youtube
     public function returnUploadedVideos()
     {
 
-        /////////////////////////////////////
         $client = session('google_client');
         $youtube = new Google_Service_YouTube($client);
-        // Define an object that will be used to make all API requests.
-        //Ajustar
-        /////////////////////////////////////
-
 
         if ($client->getAccessToken()) {
             $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
@@ -58,19 +53,21 @@ class Youtube
         $client->setScopes('https://www.googleapis.com/auth/youtube');
         $youtube = new Google_Service_YouTube($client);
 
-        $i = 0;
         foreach ($tutorials  as $tutorial) {
             $videoIDs = $videoIDs . $tutorial->link . ',';
-            $i++;
         }
             $videoResponse = $youtube->videos->listVideos('contentDetails, statistics, snippet, id', array(
                 'id' => $videoIDs));
 
+        foreach ($tutorials  as $tutorial){
+
             foreach($videoResponse['items'] as $video){
-                if($video->id = $tutorial->link){
+                if($video->id == $tutorial->link){
                     $video['tutorial_id'] = $tutorial->id;
                 }
             }
+
+        }
 //            foreach ($videoResponse['items'] as $video){
 //                $durationISO = $video->getContentDetails()->getDuration();
 //                $di = new \DateInterval($durationISO);
@@ -90,4 +87,13 @@ class Youtube
 
             return $videoResponse;
         }
+
+    public function subscribeChannel($channelId){
+
+        $client = session('google_client');
+        $youtube = new Google_Service_YouTube($client);
+
+
+
+    }
 }

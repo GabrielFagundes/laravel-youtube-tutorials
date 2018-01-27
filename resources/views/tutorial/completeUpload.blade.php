@@ -7,7 +7,7 @@
             <form method="POST" action="{{route('tutorial.save')}}">
                 {{csrf_field()}}
                 <input type="text" id="video" name="video" value="{{$video}}" hidden>
-
+                <input type="text" id="channel" name="channel" value="{{$channel}}" hidden>
                 <div class="form-group">
                     <label for="title"><i class="fa fa-youtube"></i> Título</label>
                     <input type="text" id="title" name="title" class="form-control">

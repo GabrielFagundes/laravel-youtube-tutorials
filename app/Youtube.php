@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\Auth\GoogleController;
 use Google_Service_Youtube;
 
 class Youtube
@@ -35,6 +36,7 @@ class Youtube
 //                dd($playlistItemsResponse->getSnippet()->getPublishedAt());
 //                $playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
 //                dd($playlistItemsResponse->getItems()->getSnippet()->getResourceId()->getVideoId());
+//                dd($playlistItemsResponse);
                 return $playlistItemsResponse;
             }
         }
@@ -89,11 +91,44 @@ class Youtube
         }
 
     public function subscribeChannel($channelId){
-
+        $error = "";
         $client = session('google_client');
         $youtube = new Google_Service_YouTube($client);
 
+        if ($client->getAccessToken()) {
+            try {
+                // Subscribe to a channel
+                // Create a resource id with channel id and kind.
+                $resourceId = new \Google_Service_YouTube_ResourceId();
+                $resourceId->setChannelId($channelId);
+                $resourceId->setKind('youtube#channel');
 
+                // Create a snippet with resource id.
+                $subscriptionSnippet = new \Google_Service_YouTube_SubscriptionSubscriberSnippet();
+                $subscriptionSnippet->setResourceId($resourceId);
+
+                // Create a subscription request with snippet.
+                $subscription = new \Google_Service_YouTube_Subscription();
+                $subscription->setSnippet($subscriptionSnippet);
+
+                // Execute the request and return an object containing information about the new subscription
+                $subscriptionResponse = $youtube->subscriptions->insert('id,snippet',
+                    $subscription, array());
+
+            } catch (Google_ServiceException $e) {
+                $error .= sprintf('<p>A service error occurred: <code>%s</code></p>',
+                    htmlspecialchars($e->getMessage()));
+            } catch (Google_Exception $e) {
+                $error .= sprintf('<p>An client error occurred: <code>%s</code></p>',
+                    htmlspecialchars($e->getMessage()));
+            }
+        } else {
+            // If the user hasn't authorized the app, initiate the OAuth flow
+            GoogleController::redirectToProvider();
+        }
+
+        dd($subscriptionResponse);
+        return $subscriptionResponse;
 
     }
 }

@@ -34,8 +34,10 @@ Route::post('/completeprofile', 'ProfileController@update')->name('profile.updat
 Route::group(['prefix' => 'tutorial/upload',  'middleware' => 'auth'], function()
 {
     Route::get('index', 'TutorialController@uploadIndex')->name('tutorial.show');
-    Route::get('{videoid}', 'TutorialController@uploadCreate')->name('tutorial.upload');
+    Route::post('complete', 'TutorialController@uploadCreate')->name('tutorial.upload');
     Route::post('save', 'TutorialController@uploadSubmit')->name('tutorial.save');
 });
 
 Route::get('/tutorial/{videoid}', 'TutorialController@show')->name('tutorial.upload');
+
+Route::post('/subscribe/channel', 'HandleUserActionController@subscribeUserToChannel')->name('user.subscribe');

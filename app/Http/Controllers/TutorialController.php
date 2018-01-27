@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Subcategory;
 use App\Tutorial;
+use App\User;
 use Illuminate\Http\Request;
 use App\Youtube;
 use Illuminate\Support\Facades\Auth;
@@ -37,12 +38,13 @@ class TutorialController extends Controller
         return view('tutorial.upload')->with(compact('uploadedVideos', 'videoContents'));
     }
 
-    public function uploadCreate($videoid){
-        $video = $videoid;
+    public function uploadCreate(Request $request){
+        $video = $request->video;
+        $channel = $request->channel;
         $categories = Category::all();
         $subcategories = Subcategory::all();
 
-        return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories'));
+        return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories', 'channel'));
     }
 
     public function uploadSubmit(Request $request){
@@ -53,6 +55,13 @@ class TutorialController extends Controller
 //            'titulo'        => 'required|max:20',
 //            'description'   => 'required|max:1000',
 //        ]);
+
+        $user = User::where('id', Auth::user()->id)->first();
+
+        if ($user->channel_id == 0){
+            $user->channel_id = $request->channel;
+            $user->save();
+        }
 
         $tutorial = Tutorial::where('link', $request->video)->first();
 
@@ -68,6 +77,7 @@ class TutorialController extends Controller
             $tutorial->save();
         }
         else {
+            dd($tutorial);
             echo 'erro';
             exit;
             $erro = true;

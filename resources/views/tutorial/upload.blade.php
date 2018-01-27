@@ -38,9 +38,14 @@
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card card-video">
                             <div class="card-img upload">
-                                <a href="{{url('/tutorial/upload/' . $video->getSnippet()->getResourceId()->getVideoId())}}">
+                                <form name="post_tutorial[{{  $video->getSnippet()->getResourceId()->getVideoId()  }}]" id="post_tutorial" action="{{url('/tutorial/upload/complete')}}" method="post">
+                                    {{ csrf_field() }}
+                                    <a href="#" onclick="document.forms['post_tutorial[{{  $video->getSnippet()->getResourceId()->getVideoId()  }}]'].submit();">
                                     <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Thumbnail indisponível">
                                 </a>
+                                    <input name="video" id="video" type="text" hidden value="{{ $video->getSnippet()->getResourceId()->getVideoId() }}">
+                                    <input name="channel" id="channel" type="text" hidden value="{{ $video->getSnippet()->getChannelId()}}">
+                                </form>
                                 {{--<div class="card-meta">--}}
                                     {{--<span>{{ $videoContents['duration'] }}</span>--}}
                                 {{--</div>--}}

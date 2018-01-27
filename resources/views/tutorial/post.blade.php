@@ -38,7 +38,7 @@
                                     <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
                                     <form action="{{url('/subscribe/channel')}}" method="post">
                                         {{ csrf_field() }}
-                                        <input hidden id="channelid" type="text" value="{{ $tutorial->user->channel_id }}">
+                                        <input hidden id="channelid" name="channelid" type="text" value="{{ $tutorial->user->channel_id }}">
                                         <button type="submit" class="btn-youtube">Inscrever-se</button>
                                     </form>
                                 </div>

@@ -97,23 +97,27 @@ class Youtube
 
         if ($client->getAccessToken()) {
             try {
-                // Subscribe to a channel
-                // Create a resource id with channel id and kind.
+                // This code subscribes the authenticated user to the specified channel.
+
+                // Identify the resource being subscribed to by specifying its channel ID
+                // and kind.
                 $resourceId = new \Google_Service_YouTube_ResourceId();
                 $resourceId->setChannelId($channelId);
                 $resourceId->setKind('youtube#channel');
 
-                // Create a snippet with resource id.
-                $subscriptionSnippet = new \Google_Service_YouTube_SubscriptionSubscriberSnippet();
+                // Create a snippet object and set its resource ID.
+                $subscriptionSnippet = new \Google_Service_YouTube_SubscriptionSnippet();
                 $subscriptionSnippet->setResourceId($resourceId);
 
-                // Create a subscription request with snippet.
+                // Create a subscription request that contains the snippet object.
                 $subscription = new \Google_Service_YouTube_Subscription();
                 $subscription->setSnippet($subscriptionSnippet);
 
-                // Execute the request and return an object containing information about the new subscription
+                // Execute the request and return an object containing information
+                // about the new subscription.
                 $subscriptionResponse = $youtube->subscriptions->insert('id,snippet',
                     $subscription, array());
+
 
             } catch (Google_ServiceException $e) {
                 $error .= sprintf('<p>A service error occurred: <code>%s</code></p>',
@@ -127,7 +131,7 @@ class Youtube
             GoogleController::redirectToProvider();
         }
 
-        dd($subscriptionResponse);
+//        dd($subscriptionResponse);
         return $subscriptionResponse;
 
     }

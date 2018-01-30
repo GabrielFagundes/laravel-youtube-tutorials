@@ -36,11 +36,20 @@
                                 <div class="post-meta">
                                     <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">{{ $tutorial->user->name }}</a></span>
                                     <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
-                                    <form action="{{url('/subscribe/channel')}}" method="post">
-                                        {{ csrf_field() }}
-                                        <input hidden id="channelid" name="channelid" type="text" value="{{ $tutorial->user->channel_id }}">
-                                        <button type="submit" class="btn-youtube">Inscrever-se</button>
-                                    </form>
+                                    {{ $checkSubscriber }}
+                                    @if (!$checkSubscriber)
+                                        <form id="form_subscribe" name="form_subscribe" action="{{url('/subscribe/channel')}}" method="post">
+                                            {{ csrf_field() }}
+                                            <input hidden id="channelid" name="channelid" type="text" value="{{ $tutorial->user->channel_id }}">
+                                            <button type="submit" class="btn btn-danger" >Inscrever-se</button>
+                                        </form>
+                                    @else
+                                        <form id="form_unsubscribe" name="form_unsubscribe" action="{{url('/unsubscribe/channel')}}" method="post">
+                                            {{ csrf_field() }}
+                                            <input hidden id="subscriptionid" name="subscriptionid" type="text" value="{{ $checkSubscriber }}">
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-check-circle"></i> Inscrito</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -296,3 +305,32 @@
     <!-- /main -->
 
 @endsection
+
+{{--@section('scripts')--}}
+    {{--<script>--}}
+        {{--$(document).ready(function(){--}}
+            {{--$(document).on('click','#btn-more',function(){--}}
+                {{--var id = $(this).data('id');--}}
+                {{--$("#btn-more").html("Loading....");--}}
+                {{--$.ajax({--}}
+                    {{--url : '{{ url("/home") }}',--}}
+                    {{--method : "POST",--}}
+                    {{--data : {id:id, _token:"{{csrf_token()}}"},--}}
+                    {{--dataType : "text",--}}
+                    {{--success : function (data)--}}
+                    {{--{--}}
+                        {{--if(data != '')--}}
+                        {{--{--}}
+                            {{--$('#remove-row').remove();--}}
+                            {{--$('#load-data').append(data);--}}
+                        {{--}--}}
+                        {{--else--}}
+                        {{--{--}}
+                            {{--$('#btn-more').html("No Data");--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
+{{--@endsection--}}

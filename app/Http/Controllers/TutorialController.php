@@ -23,11 +23,12 @@ class TutorialController extends Controller
     }
 
     public function show($videoId){
-
         $tutorial = Tutorial::where('link', $videoId)->first();
-//        dd($tutorial->link);
-//
-        return view('tutorial.post')->with(compact('tutorial'));
+        $channelId = $tutorial->user->channel_id;
+        $youtube = new Youtube;
+        $checkSubscriber = $youtube->checkIsSubscriber($channelId);
+
+        return view('tutorial.post')->with(compact('tutorial', 'checkSubscriber'));
     }
 
     public function uploadIndex(){

@@ -14,4 +14,12 @@ class HandleUserActionController extends Controller
         $youtube->subscribeChannel($channelId);
 
     }
+
+    public function unsubscribeUserFromChannel(Request $request){
+        $subscriptionId = $request->subscriptionid;
+        $youtube = new Youtube;
+        $youtube->unsubscribeChannel($subscriptionId);
+
+    }
+
 }

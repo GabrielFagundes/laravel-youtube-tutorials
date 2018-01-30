@@ -192,9 +192,7 @@
             </div>
             @if ($video['tutorial_id'] > 1)
                 <div id="remove-row">
-                    <center>
                         <div id="btn-more"  data-id="{{ $video['tutorial_id'] }}"  class="text-center"><a class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20" style="color:white;">Show More</a></div>
-                    </center>
                 </div>
             @endif
         </div>

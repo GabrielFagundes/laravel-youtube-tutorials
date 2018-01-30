@@ -135,4 +135,55 @@ class Youtube
         return $subscriptionResponse;
 
     }
+
+    public function checkIsSubscriber($videoPostChannel){
+        $error = "";
+        $client = session('google_client');
+        $youtube = new Google_Service_YouTube($client);
+
+        if ($client->getAccessToken()) {
+            $listSubscriptions = $youtube->subscriptions->listSubscriptions('snippet', array(
+                    'forChannelId' => $videoPostChannel,
+                    'mine' => 'true'
+                )
+            );
+
+            foreach ($listSubscriptions['items'] as $subscription){
+                if ($subscription->getSnippet()->getChannelId())
+                    return $subscription->getId();
+                else
+                    return false;
+            }
+        }
+
+        return false;
+
+    }
+
+    public function unsubscribeChannel($subscriptionId){
+        $error = "";
+        $client = session('google_client');
+        $youtube = new Google_Service_YouTube($client);
+
+        if ($client->getAccessToken()) {
+            try {
+
+                $unsubscriptionResponse = $youtube->subscriptions->delete($subscriptionId, array());
+
+            } catch (Google_ServiceException $e) {
+                $error .= sprintf('<p>A service error occurred: <code>%s</code></p>',
+                    htmlspecialchars($e->getMessage()));
+            } catch (Google_Exception $e) {
+                $error .= sprintf('<p>An client error occurred: <code>%s</code></p>',
+                    htmlspecialchars($e->getMessage()));
+            }
+        } else {
+            // If the user hasn't authorized the app, initiate the OAuth flow
+            GoogleController::redirectToProvider();
+        }
+
+//        dd($subscriptionResponse);
+        return $unsubscriptionResponse;
+
+    }
 }

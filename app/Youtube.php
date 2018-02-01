@@ -15,6 +15,7 @@ class Youtube
     {
 
         $client = session('google_client');
+        dd($client);
         $youtube = new Google_Service_YouTube($client);
 
         if ($client->getAccessToken()) {
@@ -128,7 +129,8 @@ class Youtube
             }
         } else {
             // If the user hasn't authorized the app, initiate the OAuth flow
-            GoogleController::redirectToProvider();
+            $google = new GoogleController();
+            $google->redirectToProvider();
         }
 
 //        dd($subscriptionResponse);
@@ -182,8 +184,9 @@ class Youtube
             GoogleController::redirectToProvider();
         }
 
-//        dd($subscriptionResponse);
+//        dd($unsubscriptionResponse);
         return $unsubscriptionResponse;
+
 
     }
 }

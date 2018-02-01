@@ -36,22 +36,13 @@
                                 <div class="post-meta">
                                     <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">{{ $tutorial->user->name }}</a></span>
                                     <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
-                                    {{ $checkSubscriber }}
-                                    @if (!$checkSubscriber)
-                                        <form id="form_subscribe" name="form_subscribe" action="{{url('/subscribe/channel')}}" method="post">
-                                            {{ csrf_field() }}
-                                            <input hidden id="channelid" name="channelid" type="text" value="{{ $tutorial->user->channel_id }}">
-                                            <button type="submit" class="btn btn-danger" >Inscrever-se</button>
-                                        </form>
-                                    @else
-                                        <form id="form_unsubscribe" name="form_unsubscribe" action="{{url('/unsubscribe/channel')}}" method="post">
-                                            {{ csrf_field() }}
-                                            <input hidden id="subscriptionid" name="subscriptionid" type="text" value="{{ $checkSubscriber }}">
-                                            <button type="submit" class="btn btn-danger"><i class="fa fa-check-circle"></i> Inscrito</button>
-                                        </form>
-                                    @endif
                                 </div>
                             </div>
+                            @if($tutorial->user->id != Auth::user()->id)
+                                <div id="sub-btn"  data-id="" data-url="" data-action="" class="text-center">
+                                    <a id="sub-label" class="btn btn-danger" style="color:white;">Inscrever-se</a>
+                                </div>
+                            @endif
                         </div>
                         {{ $tutorial->description }}
                     </div>
@@ -71,167 +62,6 @@
                         </div>
                     </div>
                     <div id="comments" class="comments anchor">
-                        <div class="comments-header">
-                            <h5><i class="fa fa-comment-o"></i> Comments (5)</h5>
-                            <div class="dropdown float-right">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Sorted by best <span class="caret"></span></button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item active" href="#">Best</a>
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Oldest</a>
-                                    <a class="dropdown-item" href="#">Random</a>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary text-left m-t-15 btn-block" href="#comments" role="button"><i class="fa fa-spinner fa-pulse m-r-5"></i> Load more 4 comments</a>
-                        <ul>
-                            <li>
-                                <div class="comment">
-                                    <div class="comment-avatar">
-                                        <a href="profile.html"><img src="img/user/user-1.jpg" alt=""></a>
-                                        <a class="badge badge-primary" href="profile.html" data-toggle="tooltip" data-placement="bottom" title="Add as friend"><i class="fa fa-user-plus"></i></a>
-                                    </div>
-                                    <div class="comment-post">
-                                        <div class="comment-header">
-                                            <div class="comment-author">
-                                                <h5><a href="profile.html">Venom</a></h5>
-                                                <span>Member</span>
-                                            </div>
-                                            <div class="comment-action">
-                                                <div class="dropdown float-right">
-                                                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Moderate</a>
-                                                        <a class="dropdown-item" href="#">Embed</a>
-                                                        <a class="dropdown-item" href="#">Report</a>
-                                                        <a class="dropdown-item" href="#">Mark as spam</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>Awesome these are news we were looking for, thanks DICE best thing i've heard today, but more game modes are welcome.</p>
-                                        <div class="comment-footer">
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                                <li><a href="#"><i class="icon-reply"></i> Reply</a></li>
-                                                <li><a href="#"><i class="fa fa-clock-o"></i> 3 hours ago</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="comment-avatar"><img src="img/user/user-2.jpg" alt=""></div>
-                                            <div class="comment-post">
-                                                <div class="comment-header">
-                                                    <div class="comment-author">
-                                                        <h5><a href="profile.html">Elizabeth</a></h5>
-                                                        <span>Member</span>
-                                                    </div>
-                                                    <div class="comment-action">
-                                                        <div class="dropdown float-right">
-                                                            <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#">Moderate</a>
-                                                                <a class="dropdown-item" href="#">Embed</a>
-                                                                <a class="dropdown-item" href="#">Report</a>
-                                                                <a class="dropdown-item" href="#">Mark as spam</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p>Please also consider replacing Battles with Blast (in Skirmish): it can use the same AI and would be much more fun (tokens are annoying and maps are limited)!</p>
-                                                <div class="comment-footer">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                                        <li><a href="#"><i class="icon-reply"></i> Reply</a></li>
-                                                        <li><a href="#"><i class="fa fa-clock-o"></i> 24 minutes ago</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="comment">
-                                    <div class="comment-avatar"><a href="profile.html"><img src="img/user/user-3.jpg" alt=""></a></div>
-                                    <div class="comment-post">
-                                        <div class="comment-header">
-                                            <div class="comment-author">
-                                                <h5>
-                                                    <a href="profile.html">Clark</a>
-                                                    <span class="badge badge-outline-primary">Admin</span>
-                                                </h5>
-                                            </div>
-                                            <div class="comment-action">
-                                                <div class="comment-action">
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Moderate</a>
-                                                            <a class="dropdown-item" href="#">Embed</a>
-                                                            <a class="dropdown-item" href="#">Report</a>
-                                                            <a class="dropdown-item" href="#">Mark as spam</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>Thank you this news and I can't wait for offline content to drop next week.</p>
-                                        <div class="comment-footer">
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                                <li><a href="#"><i class="icon-reply"></i> Reply</a></li>
-                                                <li><a href="#"><i class="fa fa-clock-o"></i> June 16, 2017 8:13 pm</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="comment">
-                                    <div class="comment-avatar"><a href="profile.html"><img src="img/user/user-4.jpg" alt=""></a></div>
-                                    <div class="comment-post">
-                                        <div class="comment-header">
-                                            <div class="comment-author">
-                                                <h5><a href="profile.html">Strange</a></h5>
-                                                <span>Member</span>
-                                            </div>
-                                            <div class="comment-action">
-                                                <div class="comment-action">
-                                                    <div class="dropdown float-right">
-                                                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#">Moderate</a>
-                                                            <a class="dropdown-item" href="#">Embed</a>
-                                                            <a class="dropdown-item" href="#">Report</a>
-                                                            <a class="dropdown-item" href="#">Mark as spam</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>To all those reading who have not yet bought this game yet, and are a fan of Star Wars - Don't listen to the nay-sayers on these forums, this game is simply amazing!</p>
-                                        <div class="comment-footer">
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i> Like</a></li>
-                                                <li><a href="#"><i class="icon-reply"></i> Reply</a></li>
-                                                <li><a href="#"><i class="fa fa-clock-o"></i> June 11, 2017 14:26 am</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <form>
-                            <h5>Leave a comment</h5>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="5" placeholder="Your Comment"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-shadow">Submit Comment</button>
-                        </form>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -249,51 +79,6 @@
                                     <span><i class="fa fa-clock-o"></i> July 30, 2017</span>
                                     <span><i class="fa fa-eye"></i> 345x</span>
                                 </li>
-                                <li>
-                                    <div class="widget-img">
-                                        <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/Kae-JjbLsgA/mqdefault.jpg" alt=""></a>
-                                        <span>13:07</span>
-                                    </div>
-                                    <h4><a href="blog-post.html">Star Wars Battlefront II -- The Story of an Imperial Soldier</a></h4>
-                                    <span><i class="fa fa-clock-o"></i> July 29, 2017</span>
-                                    <span><i class="fa fa-eye"></i> 1269x</span>
-                                </li>
-                                <li>
-                                    <div class="widget-img">
-                                        <a href="blog-post.html"><img src="https://i.ytimg.com/vi/kUKrStkG-hE/mqdefault.jpg" alt=""></a>
-                                        <span>5:17</span>
-                                    </div>
-                                    <h4><a href="blog-post.html">Far Cry 5: Full Length Reveal Trailer</a></h4>
-                                    <span><i class="fa fa-clock-o"></i> July 20, 2017</span>
-                                    <span><i class="fa fa-eye"></i> 692x</span>
-                                </li>
-                                <li>
-                                    <div class="widget-img">
-                                        <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/B6qY-P4eo1Q/mqdefault.jpg" alt=""></a>
-                                        <span>2:30</span>
-                                    </div>
-                                    <h4><a href="blog-post.html">Mafia 3: The Movie (All Cutscenes HD)</a></h4>
-                                    <span><i class="fa fa-clock-o"></i> June 13, 2017</span>
-                                    <span><i class="fa fa-eye"></i> 1136x</span>
-                                </li>
-                                <li>
-                                    <div class="widget-img">
-                                        <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/1Y_DVbmRNhc/mqdefault.jpg" alt=""></a>
-                                        <span>2:12</span>
-                                    </div>
-                                    <h4><a href="blog-post.html">Ghost in the Shell (2017) - Official Trailer</a></h4>
-                                    <span><i class="fa fa-clock-o"></i> May 14, 2017</span>
-                                    <span><i class="fa fa-eye"></i> 7879x</span>
-                                </li>
-                                <li>
-                                    <div class="widget-img">
-                                        <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/PmaZw1xMxBQ/mqdefault.jpg" alt=""></a>
-                                        <span>15:38</span>
-                                    </div>
-                                    <h4><a href="blog-post.html">Call of Duty: Infinite Warfare Gameplay</a></h4>
-                                    <span><i class="fa fa-clock-o"></i> March 1, 2017</span>
-                                    <span><i class="fa fa-eye"></i> 723x</span>
-                                </li>
                             </ul>
                         </div>
                         <!-- /widget post -->
@@ -304,33 +89,67 @@
     </section>
     <!-- /main -->
 
+
 @endsection
 
-{{--@section('scripts')--}}
-    {{--<script>--}}
-        {{--$(document).ready(function(){--}}
-            {{--$(document).on('click','#btn-more',function(){--}}
-                {{--var id = $(this).data('id');--}}
-                {{--$("#btn-more").html("Loading....");--}}
-                {{--$.ajax({--}}
-                    {{--url : '{{ url("/home") }}',--}}
-                    {{--method : "POST",--}}
-                    {{--data : {id:id, _token:"{{csrf_token()}}"},--}}
-                    {{--dataType : "text",--}}
-                    {{--success : function (data)--}}
-                    {{--{--}}
-                        {{--if(data != '')--}}
-                        {{--{--}}
-                            {{--$('#remove-row').remove();--}}
-                            {{--$('#load-data').append(data);--}}
-                        {{--}--}}
-                        {{--else--}}
-                        {{--{--}}
-                            {{--$('#btn-more').html("No Data");--}}
-                        {{--}--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--});--}}
-        {{--});--}}
-    {{--</script>--}}
-{{--@endsection--}}
+@section('scripts')
+
+  <script>
+        function setSubscribeButton() {
+            $('#sub-label').text('Inscrever-se');
+            $('#sub-btn').data('id', '{{$tutorial->user->channel_id }}');
+            $('#sub-btn').data('url', '/channel/subscribe');
+            $('#sub-btn').data('action', 'subscribe');
+        }
+
+        function setUnsubscribeButton() {
+            $('#sub-label').text('Inscrito');
+            $('#sub-label').prepend('<i class="fa fa-check-circle' + '"></i> ')
+            $('#sub-btn').data('id', '{{ $checkSubscriber }}');
+            $('#sub-btn').data('url', '/channel/unsubscribe');
+            $('#sub-btn').data('action', 'unsubscribe');
+        }
+
+
+        $(document).ready(function(){
+            $(document).on('click','#sub-btn',function(){
+                var id = $(this).data('id');
+                var url = $(this).data('url');
+                var setButton = $(this).data('action');
+
+                $("#sub-label").text("...");
+                $.ajax({
+                    url : url,
+                    method : "POST",
+                    data : {id:id, _token:"{{csrf_token()}}"},
+                    dataType : "json",
+                    success : function (data)
+                    {
+                        if(data != '')
+                        {
+                            if (setButton == 'subscribe'){
+                                setUnsubscribeButton();
+                            }else{
+                                setSubscribeButton();
+                            }
+                        }
+                        else
+                        {
+                            alert('Não recebemos o retorno do Youtube para sua inscrição.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+  @if(!$checkSubscriber)
+      <script>
+          setSubscribeButton();
+      </script>
+  @else
+      <script>
+          setUnsubscribeButton()
+      </script>
+  @endif
+@endsection

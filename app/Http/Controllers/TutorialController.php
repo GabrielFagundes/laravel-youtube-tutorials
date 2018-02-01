@@ -25,8 +25,11 @@ class TutorialController extends Controller
     public function show($videoId){
         $tutorial = Tutorial::where('link', $videoId)->first();
         $channelId = $tutorial->user->channel_id;
-        $youtube = new Youtube;
-        $checkSubscriber = $youtube->checkIsSubscriber($channelId);
+        $checkSubscriber = '';
+        if (Auth::user()){
+            $youtube = new Youtube;
+            $checkSubscriber = $youtube->checkIsSubscriber($channelId);
+        }
 
         return view('tutorial.post')->with(compact('tutorial', 'checkSubscriber'));
     }

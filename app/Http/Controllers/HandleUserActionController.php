@@ -9,16 +9,20 @@ class HandleUserActionController extends Controller
 {
     public function subscribeUserToChannel(Request $request){
 
-        $channelId = $request->channelid;
+        $channelId = $request->id;
         $youtube = new Youtube;
-        $youtube->subscribeChannel($channelId);
+        $response = $youtube->subscribeChannel($channelId);
+
+        return \GuzzleHttp\json_encode($response);
 
     }
 
     public function unsubscribeUserFromChannel(Request $request){
-        $subscriptionId = $request->subscriptionid;
+        $subscriptionId = $request->id;
         $youtube = new Youtube;
-        $youtube->unsubscribeChannel($subscriptionId);
+        $response = $youtube->unsubscribeChannel($subscriptionId);
+
+        return \GuzzleHttp\json_encode($response);
 
     }
 

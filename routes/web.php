@@ -40,5 +40,5 @@ Route::group(['prefix' => 'tutorial/upload',  'middleware' => 'auth'], function(
 
 Route::get('/tutorial/{videoid}', 'TutorialController@show')->name('tutorial.upload');
 
-Route::post('/subscribe/channel', 'HandleUserActionController@subscribeUserToChannel')->name('user.subscribe');
-Route::post('/unsubscribe/channel', 'HandleUserActionController@unsubscribeUserFromChannel')->name('user.unsubscribe');
+Route::post('/channel/subscribe', 'HandleUserActionController@subscribeUserToChannel')->name('user.subscribe');
+Route::post('/channel/unsubscribe', 'HandleUserActionController@unsubscribeUserFromChannel')->name('user.unsubscribe');

@@ -4,18 +4,23 @@ namespace App;
 
 use App\Http\Controllers\Auth\GoogleController;
 use Google_Service_Youtube;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Youtube
 {
     public function  __construct()
     {
+        if (!Auth::guest()){
+            refreshGoogle();
+        }
     }
 
     public function returnUploadedVideos()
     {
 
         $client = session('google_client');
-        dd($client);
+        //dd($client);
         $youtube = new Google_Service_YouTube($client);
 
         if ($client->getAccessToken()) {
@@ -34,10 +39,10 @@ class Youtube
                     'maxResults' => 50
                 ));
 
-//                dd($playlistItemsResponse->getSnippet()->getPublishedAt());
-//                $playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
-//                dd($playlistItemsResponse->getItems()->getSnippet()->getResourceId()->getVideoId());
-//                dd($playlistItemsResponse);
+                //dd($playlistItemsResponse->getSnippet()->getPublishedAt());
+                //$playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
+                //dd($playlistItemsResponse->getItems()->getSnippet()->getResourceId()->getVideoId());
+                //dd($playlistItemsResponse);
                 return $playlistItemsResponse;
             }
         }

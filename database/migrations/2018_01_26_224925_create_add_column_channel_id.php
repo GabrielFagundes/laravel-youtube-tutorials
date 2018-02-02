@@ -15,6 +15,7 @@ class CreateAddColumnChannelId extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('channel_id')->default(0);
+            $table->string('refresh_token')->nullable();
         });
     }
 

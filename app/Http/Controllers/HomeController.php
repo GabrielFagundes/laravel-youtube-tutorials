@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
 
         $youtube = new Youtube();
-        $tutorials = Tutorial::orderBy('id', 'DESC')->limit(5)->get();
+        $tutorials = Tutorial::orderBy('id', 'DESC')->limit(30)->get();
 //        dd($tutorials);
         $videos = $youtube->returnVideoContent($tutorials);
 //                dd($videos);

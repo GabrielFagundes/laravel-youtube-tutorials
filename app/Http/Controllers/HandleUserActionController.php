@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class HandleUserActionController extends Controller
 {
     public function subscribeUserToChannel(Request $request){
-
         $channelId = $request->id;
         $youtube = new Youtube;
         $response = $youtube->subscribeChannel($channelId);

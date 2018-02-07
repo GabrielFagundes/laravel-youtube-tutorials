@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af97220446202ef93bd8360dac80317d",
+    "hash": "18145cd03d0051da0bd6d369471c0031",
     "content-hash": "5bedc291987a43d1a2230b0d47e42d74",
     "packages": [
         {
@@ -427,16 +427,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.44",
+            "version": "v0.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "7f1b3a3f387fc3435f27003977ebf5989f8bcca2"
+                "reference": "35909fbc909bf9f9e0d36dd05b62f4b1d5ffe3ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/7f1b3a3f387fc3435f27003977ebf5989f8bcca2",
-                "reference": "7f1b3a3f387fc3435f27003977ebf5989f8bcca2",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/35909fbc909bf9f9e0d36dd05b62f4b1d5ffe3ae",
+                "reference": "35909fbc909bf9f9e0d36dd05b62f4b1d5ffe3ae",
                 "shasum": ""
             },
             "require": {
@@ -460,7 +460,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-01-28 00:23:18"
+            "time": "2018-02-03 00:23:12"
         },
         {
             "name": "google/auth",

@@ -1,40 +1,22 @@
 @extends('layouts.app')
 
+@section('header')
+    <link href="{{ asset('css/star-rating.min.css') }}" rel="stylesheet" >
+    <link href="{{ asset('themes/krajee-fa/theme.min.css') }}" rel="stylesheet" >
+    <script src="{{ asset('js/star-rating.min.js') }}"></script>
+    <script src="{{ asset('js/locales/pt-BR.js') }}"></script>
+    <script src="{{ asset('themes/krajee-fa/theme.min.js') }}"></script>
+@endsection
+
 @section('content')
 
     <!-- main -->
-    <section class="breadcrumbs">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li><a href="/">Home</a></li>
-                <li><a href="forums.html">Videos</a></li>
-                <li class="active">Star Wars Battlefront II: Full Length Reveal Trailer</li>
-            </ol>
-        </div>
-    </section>
-
     <section class="bg-image" style="background-image: url('https://img.youtube.com/vi/zSd9McRXHZ8/maxresdefault.jpg');">
         <div class="overlay-light"></div>
         <div class="container">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="{{ 'https://www.youtube.com/embed/' . $tutorial->link . '?rel=0&amp;amp;autoplay=1&amp;amp;showinfo=0' }}" allowfullscreen></iframe>
             </div>
-            <center>
-            <div class="stars">
-                <form action="">
-                    <input class="star star-5" id="star-5" type="radio" name="star"/>
-                    <label class="star star-5" for="star-5"></label>
-                    <input class="star star-4" id="star-4" type="radio" name="star"/>
-                    <label class="star star-4" for="star-4"></label>
-                    <input class="star star-3" id="star-3" type="radio" name="star"/>
-                    <label class="star star-3" for="star-3"></label>
-                    <input class="star star-2" id="star-2" type="radio" name="star"/>
-                    <label class="star star-2" for="star-2"></label>
-                    <input class="star star-1" id="star-1" type="radio" name="star"/>
-                    <label class="star star-1" for="star-1"></label>
-                </form>
-            </div>
-            </center>
         </div>
     </section>
 
@@ -67,6 +49,7 @@
                             @endif
                         </div>
                         {{ $tutorial->description }}
+                        <input id="input-1-ltr-star-xs" name="input-1-ltr-star-xs" class="kv-ltr-theme-fa-star rating-loading" value="1" dir="ltr" data-size="xs">
                     </div>
                     <div class="post-actions">
                         <div class="post-tags">
@@ -162,6 +145,11 @@
                     }
                 });
             });
+
+            $('.kv-ltr-theme-fa-star').rating({
+                hoverOnClear: false,
+                theme: 'krajee-fa'
+            });
         });
     </script>
 
@@ -174,4 +162,5 @@
           setUnsubscribeButton()
       </script>
   @endif
+
 @endsection

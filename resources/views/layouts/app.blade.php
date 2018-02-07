@@ -18,6 +18,8 @@
     <!-- theme css -->
     <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" >
+
+    <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
     @yield('header')
 </head>
 <body>
@@ -86,7 +88,6 @@
 <!-- /footer -->
 
 <!-- Scripts -->
-<script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 

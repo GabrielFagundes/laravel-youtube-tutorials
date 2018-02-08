@@ -49,7 +49,7 @@
                             @endif
                         </div>
                         {{ $tutorial->description }}
-                        <input id="input-1-ltr-star-xs" name="input-1-ltr-star-xs" class="kv-ltr-theme-fa-star rating-loading" value="1" dir="ltr" data-size="xs">
+                        <input id="star-rating" name="star-rating" class="kv-ltr-theme-fa-star rating-loading" value="{{ $tutorial->userSumRating }}" dir="ltr" data-size="xs">
                     </div>
                     <div class="post-actions">
                         <div class="post-tags">
@@ -146,10 +146,42 @@
                 });
             });
 
-            $('.kv-ltr-theme-fa-star').rating({
+            $('#star-rating').rating({
                 hoverOnClear: false,
-                theme: 'krajee-fa'
+                theme: 'krajee-fa',
+                filledStar: '<i class="fa fa-gamepad"></i>',
+                emptyStar: '<i class="fa fa-gamepad"></i>',
+                showCaption: false,
+                showClear: false
+
             });
+
+            $('#star-rating').on('rating:change', function(event, value, caption) {
+                console.log(value);
+
+                var id_tutorial = '{{ $tutorial->id }}';
+                var rating = value;
+
+                $.ajax({
+                    url : '/user/rating',
+                    method : "POST",
+                    data : {id:id_tutorial, value:rating, _token:"{{csrf_token()}}"},
+                    dataType : "json",
+                    success : function (data)
+                    {
+                        if(data != '')
+                        {
+
+                        }
+                        else
+                        {
+                            alert('Erro');
+                        }
+                    }
+                });
+
+            });
+
         });
     </script>
 

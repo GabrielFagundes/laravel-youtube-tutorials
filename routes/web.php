@@ -42,3 +42,5 @@ Route::get('/tutorial/{videoid}', 'TutorialController@show')->name('tutorial.upl
 
 Route::post('/channel/subscribe', 'HandleUserActionController@subscribeUserToChannel')->name('user.subscribe');
 Route::post('/channel/unsubscribe', 'HandleUserActionController@unsubscribeUserFromChannel')->name('user.unsubscribe');
+
+Route::post('/user/rating', 'HandleUserActionController@tutorialRating')->name('tutorial.rating');

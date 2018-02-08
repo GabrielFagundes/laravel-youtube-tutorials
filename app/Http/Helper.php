@@ -26,7 +26,7 @@ function refreshGoogle()
     // dd($current,$expired);
     // If current date exceeds expired date request new access token
     if($current > $expired) {
-    dd($current);
+//    dd($current);
         // Set Client
         $client = new \Google_Client();
         $client->setClientId(env('GOOGLE_CLIENT_ID'));

@@ -32,7 +32,7 @@
                             <div>
                                 <h2 class="post-title">{{ $tutorial->title }}</h2>
                                 <div class="post-meta">
-                                    <span><i class="fa fa-clock-o"></i> {{ formatDate($tutorial->created_at, 'formattedString') }} por <a href="profile.html">{{ $tutorial->user->name }}</a></span>
+                                    <span><i class="fa fa-clock-o"></i> {{ formatDate($tutorial->created_at, 'formattedString') }} por <a href="{{ url('/profile/' . $tutorial->user->id) }}">{{ $tutorial->user->name }}</a></span>
                                 </div>
                             </div>
                             @if(Auth::user())
@@ -61,10 +61,7 @@
                             <a href="#">#{{ $tutorial->subcategory->description }}</a>
                         </div>
                         <div class="social-share">
-                            <a class="btn btn-social btn-facebook btn-circle" href="#" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on facebook"><i class="fa fa-facebook"></i></a>
-                            <span>5.345k</span>
-                            <a class="btn btn-social btn-twitter btn-circle" href="#" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on twitter"><i class="fa fa-twitter"></i></a>
-                            <a class="btn btn-social btn-google-plus btn-circle" href="#" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on google-plus"><i class="fa fa-google-plus"></i></a>
+                            <a class="btn btn-social btn-facebook btn-circle" href="https://www.facebook.com/sharer/sharer.php?u=tutoriube.dev/tutorial/{{ $tutorial->link }}" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on facebook"><i class="fa fa-facebook"></i></a>
                         </div>
                     </div>
                     <div id="comments" class="comments anchor">
@@ -161,8 +158,10 @@
                 filledStar: '<i class="fa fa-gamepad"></i>',
                 emptyStar: '<i class="fa fa-gamepad"></i>',
                 showCaption: false,
-                showClear: false
-
+                showClear: false,
+                @if($tutorial->userSumRating > 0)
+                displayOnly: true,
+                @endif
             });
 
             $('#star-rating').on('rating:change', function(event, value, caption) {
@@ -207,16 +206,6 @@
 
     {{--Comentários disqus    --}}
     <script>
-
-        /**
-         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-        /*
-         var disqus_config = function () {
-         this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-         this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-         };
-         */
         (function() { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
             s.src = 'https://tutoriube.disqus.com/embed.js';

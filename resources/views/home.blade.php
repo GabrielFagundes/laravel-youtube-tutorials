@@ -161,8 +161,8 @@
         <div class="container">
             <div class="heading">
                 <i class="fa fa-film"></i>
-                <h2>Recent Videos</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2>Tutoriais Recentes</h2>
+                <p>Abaixo você poderá visualizar os últimos tutoriais postados</p>
             </div>
 
             <div id="load-data" class="row row-5">
@@ -171,7 +171,7 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="card card-video">
                                 <div class="card-img">
-                                    <a href="video-post.html">
+                                    <a href="{{ url('/tutorial/'. $video->getId()) }}">
                                         <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
                                     </a>
                                     <div class="card-meta">
@@ -181,8 +181,8 @@
                                 <div class="card-block">
                                     <h4 class="card-title"><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ $video->getSnippet()->getTitle() }}</a></h4>
                                     <div class="card-meta">
-                                        <span><i class="fa fa-clock-o"></i> {{ time() }}</span>
-                                        <span>6521 views</span>
+                                        <span><i class="fa fa-clock-o"></i> {{ formatDate($video->getSnippet()->getPublishedAt(), 'fromISO', $video->getId()) }}</span>
+                                        <span>{{ $video->getStatistics()->getViewCount() }} visualizações</span>
                                     </div>
                                     <p>{{ cutString($video->getSnippet()->getDescription()) }}</p>
                                 </div>
@@ -192,7 +192,7 @@
             </div>
             @if ($video['tutorial_id'] > 1)
                 <div id="remove-row">
-                        <div id="btn-more"  data-id="{{ $video['tutorial_id'] }}"  class="text-center"><a class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20" style="color:white;">Show More</a></div>
+                        <div id="btn-more"  data-id="{{ $video['tutorial_id'] }}"  class="text-center"><a class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20" style="color:white;">Mostrar mais</a></div>
                 </div>
             @endif
         </div>
@@ -200,7 +200,7 @@
 
     <section class="bg-secondary p-t-30 p-b-0">
         <div class="container">
-            <h6 class="subtitle">Recommended Videos</h6>
+            <h6 class="subtitle">Vídeos Recomendados</h6>
             <div class="row row-5">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="card card-video">

@@ -1,11 +1,12 @@
 <?php
+use Carbon\Carbon;
 
 function cutString($string){
 
     $stringFormatted = $string;
 
-    if (strlen($string) > 100)
-        $stringFormatted = substr($string, 0, 97) . '...';
+    if (strlen($string) > 40)
+        $stringFormatted = substr($string, 0, 37) . '...';
 
     return $stringFormatted ;
 
@@ -45,4 +46,34 @@ function refreshGoogle()
     }
 
     return false;
+}
+
+function formatDate($date, $type, $videoID = null){
+    Carbon::setLocale('pt_BR');
+
+    switch ($type){
+        case 'commum':
+            $date = date_format($date, 'd-m-Y');
+            return $date;
+
+        case 'formattedString':
+            Carbon::setLocale('pt_BR');
+            $carbon = new Carbon($date);
+            $formattedDate = $carbon->toFormattedDateString($date);
+            return $formattedDate;
+
+        case 'humans':
+            $carbon = new Carbon($date);
+            $formattedDate = $carbon->diffForHumans();
+            return $formattedDate;
+
+        case 'fromISO':
+            $tutorial = \App\Tutorial::where('link', $videoID)->first();
+            $date = $tutorial->created_at;
+            $carbon = new Carbon($date);
+            $formattedDate = $carbon->diffForHumans();
+            return $formattedDate;
+    }
+
+
 }

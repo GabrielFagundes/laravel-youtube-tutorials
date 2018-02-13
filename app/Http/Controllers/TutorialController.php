@@ -31,7 +31,12 @@ class TutorialController extends Controller
             $checkSubscriber = $youtube->checkIsSubscriber($channelId);
         }
 
-        return view('tutorial.post')->with(compact('tutorial', 'checkSubscriber'));
+        $youtube = new Youtube();
+        $tutorials = Tutorial::orderBy('id', 'DESC')->limit(5)->get();
+        $videos = $youtube->returnVideoContent($tutorials);
+
+
+        return view('tutorial.post')->with(compact('tutorial', 'checkSubscriber', 'videos'));
     }
 
     public function uploadIndex(){

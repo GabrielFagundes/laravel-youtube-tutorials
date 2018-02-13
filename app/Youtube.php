@@ -18,7 +18,6 @@ class Youtube
 
     public function returnUploadedVideos()
     {
-
         $client = session('google_client');
         //dd($client);
         $youtube = new Google_Service_YouTube($client);
@@ -97,6 +96,7 @@ class Youtube
         }
 
     public function subscribeChannel($channelId){
+
         $error = "";
         $client = session('google_client');
         $youtube = new Google_Service_YouTube($client);
@@ -168,6 +168,7 @@ class Youtube
     }
 
     public function unsubscribeChannel($subscriptionId){
+
         $error = "";
         $client = session('google_client');
         $youtube = new Google_Service_YouTube($client);
@@ -192,6 +193,6 @@ class Youtube
 //        dd($unsubscriptionResponse);
         return $unsubscriptionResponse;
 
-
     }
+
 }

@@ -32,32 +32,33 @@
                             <div>
                                 <h2 class="post-title">{{ $tutorial->title }}</h2>
                                 <div class="post-meta">
-                                    <span><i class="fa fa-clock-o"></i> August 22, 2017 by <a href="profile.html">{{ $tutorial->user->name }}</a></span>
-                                    <span><a href="#comments"><i class="fa fa-comment-o"></i> 33 comments</a></span>
+                                    <span><i class="fa fa-clock-o"></i> {{ formatDate($tutorial->created_at, 'formattedString') }} por <a href="profile.html">{{ $tutorial->user->name }}</a></span>
                                 </div>
                             </div>
                             @if(Auth::user())
                                 @if($tutorial->user->id != Auth::user()->id)
                                     <div id="sub-btn"  data-id="" data-url="" data-action="" class="text-center">
-                                        <a id="sub-label" class="btn btn-danger" style="color:white;">Inscrever-se</a>
+                                        <a id="sub-label" class="btn btn-danger subscribe">Inscrever-se</a>
                                     </div>
                                 @endif
                             @else
                                 <div id="sub-btn"  data-id="" data-url="" data-action="" class="text-center">
-                                    <a id="sub-label" class="btn btn-danger" style="color:white;">Inscrever-se</a>
+                                    <a id="sub-label" href="{{ url('auth/google') }}" class="btn btn-danger subscribe">Inscrever-se</a>
                                 </div>
                             @endif
                         </div>
                         {{ $tutorial->description }}
-                        <input id="star-rating" name="star-rating" class="kv-ltr-theme-fa-star rating-loading" value="{{ $tutorial->userSumRating }}" dir="ltr" data-size="xs">
+                        @if(Auth::user())
+                            <input id="star-rating" name="star-rating" class="kv-ltr-theme-fa-star rating-loading" value="{{ $tutorial->userSumRating }}" dir="ltr" data-size="xs">
+                        @else
+                            <br><br>
+                            <p>Faça <a href="{{ url('auth/google') }}" style="color: #0000F0">login</a> para avaliar este tutorial</p>
+                        @endif
                     </div>
                     <div class="post-actions">
                         <div class="post-tags">
-                            <a href="#">#star wars</a>
-                            <a href="#">#battlefront 2</a>
-                            <a href="#">#gameplay</a>
-                            <a href="#">#trailer</a>
-                            <a href="#">#galaxy</a>
+                            <a href="#">#{{ $tutorial->category->description }}</a>
+                            <a href="#">#{{ $tutorial->subcategory->description }}</a>
                         </div>
                         <div class="social-share">
                             <a class="btn btn-social btn-facebook btn-circle" href="#" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on facebook"><i class="fa fa-facebook"></i></a>
@@ -76,15 +77,17 @@
                         <div class="widget widget-videos">
                             <h5 class="widget-title">Recommends</h5>
                             <ul class="widget-list">
-                                <li>
-                                    <div class="widget-img">
-                                        <a href="blog-post.html"><img src="https://i1.ytimg.com/vi/4BLkEJu9szM/mqdefault.jpg" alt=""></a>
-                                        <span>2:13</span>
-                                    </div>
-                                    <h4><a href="blog-post.html">Titanfall 2's Trophies Only Have 3 Earned Through Multiplayer</a></h4>
-                                    <span><i class="fa fa-clock-o"></i> July 30, 2017</span>
-                                    <span><i class="fa fa-eye"></i> 345x</span>
-                                </li>
+                                @foreach($videos['items'] as $video)
+                                    <li>
+                                        <div class="widget-img">
+                                            <a href="{{ url('/tutorial/'. $video->getId()) }}"><img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt=""></a>
+                                            <span>2:13</span>
+                                        </div>
+                                        <h4><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ $video->getSnippet()->getTitle() }}</a></h4>
+                                        <span><i class="fa fa-clock-o"></i> {{ formatDate($video->getSnippet()->getPublishedAt(), 'fromISO', $video->getId()) }} </span>
+                                        <span><i class="fa fa-eye"></i> {{ $video->getStatistics()->getViewCount() }} </span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <!-- /widget post -->
@@ -115,6 +118,8 @@
             $('#sub-btn').data('id', '{{ $checkSubscriber }}');
             $('#sub-btn').data('url', '/channel/unsubscribe');
             $('#sub-btn').data('action', 'unsubscribe');
+            $('#sub-label').removeClass('subscribe');
+            $('#sub-label').addClass('subscribed');
         }
 
 //        Document.Ready
@@ -124,7 +129,12 @@
                 var url = $(this).data('url');
                 var setButton = $(this).data('action');
 
-                $("#sub-label").text("...");
+                if (setButton == 'subscribe'){
+                    setUnsubscribeButton();
+                }else{
+                    setSubscribeButton();
+                }
+
                 $.ajax({
                     url : url,
                     method : "POST",
@@ -134,11 +144,7 @@
                     {
                         if(data != '')
                         {
-                            if (setButton == 'subscribe'){
-                                setUnsubscribeButton();
-                            }else{
-                                setSubscribeButton();
-                            }
+                            console.log('Ação realizada com sucesso!');
                         }
                         else
                         {
@@ -174,7 +180,7 @@
                     {
                         if(data != '')
                         {
-
+                            console.log('Success!')
                         }
                         else
                         {

@@ -56,6 +56,16 @@ class TutorialController extends Controller
         return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories', 'channel'));
     }
 
+    public function search(Request $request){
+
+        $busca = $request->busca;
+        $youtube = new Youtube();
+        $tutorials = Tutorial::whereRaw('LOWER(`title`) LIKE ? ', ['%' .trim(strtolower($busca)).'%'])->orderby('id', 'DESC')->limit(12)->get();
+//        dd($tutorials->count());
+        $videos = $youtube->returnVideoContent($tutorials);
+        return view('tutorial.search')->with(compact('tutorials', 'videos'));
+    }
+
     public function uploadSubmit(Request $request){
 
         //echo 'teste'; exit;
@@ -86,10 +96,10 @@ class TutorialController extends Controller
             $tutorial->save();
         }
         else {
-            dd($tutorial);
-            echo 'erro';
-            exit;
-            $erro = true;
+//            dd($tutorial);
+//            echo 'erro';
+//            exit;
+           return $erro = true;
         }
 
         return redirect('home');

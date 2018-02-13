@@ -27,10 +27,8 @@ class HomeController extends Controller
     {
 
         $youtube = new Youtube();
-        $tutorials = Tutorial::orderBy('id', 'DESC')->limit(10)->get();
-//        dd($tutorials);
+        $tutorials = Tutorial::orderBy('id', 'DESC')->limit(12)->get();
         $videos = $youtube->returnVideoContent($tutorials);
-//                dd($videos);
 
         return view('home')->with(compact('tutorials', 'videos'));
     }
@@ -40,7 +38,7 @@ class HomeController extends Controller
         $id = $request->id;
         $youtube = new Youtube();
 
-        $tutorials = Tutorial::where('id','<',$id)->orderBy('id','DESC')->limit(10)->get();
+        $tutorials = Tutorial::where('id','<',$id)->orderBy('id','DESC')->limit(12)->get();
 
         if(!$tutorials->isEmpty())
         {

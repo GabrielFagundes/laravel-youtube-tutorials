@@ -38,6 +38,8 @@ Route::group(['prefix' => 'tutorial/upload',  'middleware' => 'auth'], function(
     Route::post('save', 'TutorialController@uploadSubmit')->name('tutorial.save');
 });
 
+Route::post('/search/video', 'TutorialController@search')->name('tutorial.search');
+
 Route::get('/tutorial/{videoid}', 'TutorialController@show')->name('tutorial.upload');
 
 Route::post('/channel/subscribe', 'HandleUserActionController@subscribeUserToChannel')->name('user.subscribe');

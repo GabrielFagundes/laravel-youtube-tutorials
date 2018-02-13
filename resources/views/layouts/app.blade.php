@@ -69,8 +69,9 @@
         </div>
         <div class="navbar-search">
             <div class="container">
-                <form method="post">
-                    <input type="text" class="form-control" placeholder="Search...">
+                <form method="post" action="{{ url('/search/video') }}">
+                    {{ csrf_field() }}
+                    <input id="busca" name="busca" type="text" class="form-control" placeholder="Qual tutorial você está buscando?">
                     <i class="fa fa-times close"></i>
                 </form>
             </div>

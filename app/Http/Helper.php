@@ -77,3 +77,14 @@ function formatDate($date, $type, $videoID = null){
 
 
 }
+
+function getTitle($link){
+
+    $videoId = $link;
+
+    $tutorial = \App\Tutorial::where('link', $videoId)->first();
+
+
+    return $tutorial->title;
+
+}

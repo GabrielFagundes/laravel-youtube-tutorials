@@ -179,7 +179,7 @@
                                     </div>
                                 </div>
                                 <div class="card-block">
-                                    <h4 class="card-title"><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ $video->getSnippet()->getTitle() }}</a></h4>
+                                    <h4 class="card-title"><a href="{{ url('/tutorial/'. $video->getId()) }}">{{ getTitle($video->getId()) }}</a></h4>
                                     <div class="card-meta">
                                         <span><i class="fa fa-clock-o"></i> {{ formatDate($video->getSnippet()->getPublishedAt(), 'fromISO', $video->getId()) }}</span>
                                         <span>{{ $video->getStatistics()->getViewCount() }} visualizações</span>

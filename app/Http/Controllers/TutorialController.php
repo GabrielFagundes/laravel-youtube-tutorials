@@ -22,6 +22,25 @@ class TutorialController extends Controller
 
     }
 
+    public function search(Request $request){
+
+        $busca = $request->busca;
+        $youtube = new Youtube();
+        $tutorials = Tutorial::whereRaw('LOWER(`title`) LIKE ? ', ['%' .trim(strtolower($busca)).'%'])->orderby('id', 'DESC')->limit(12)->get();
+        $videos = $youtube->returnVideoContent($tutorials);
+        return view('tutorial.search')->with(compact('tutorials', 'videos'));
+    }
+
+    public function searchByFilter(Request $request){
+
+        $filtro = $request->filtro;
+        $youtube = new Youtube();
+//        $tutorials = Tutorial::whereRaw('LOWER(`title`) LIKE ? ', ['%' .trim(strtolower($busca)).'%'])->orderby('id', 'DESC')->limit(12)->get();
+        $videos = $youtube->returnVideoContent($tutorials);
+        return view('tutorial.search')->with(compact('tutorials', 'videos'));
+
+    }
+
     public function show($videoId){
         $tutorial = Tutorial::where('link', $videoId)->first();
         $channelId = $tutorial->user->channel_id;
@@ -54,16 +73,6 @@ class TutorialController extends Controller
         $subcategories = Subcategory::all();
 
         return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories', 'channel'));
-    }
-
-    public function search(Request $request){
-
-        $busca = $request->busca;
-        $youtube = new Youtube();
-        $tutorials = Tutorial::whereRaw('LOWER(`title`) LIKE ? ', ['%' .trim(strtolower($busca)).'%'])->orderby('id', 'DESC')->limit(12)->get();
-//        dd($tutorials->count());
-        $videos = $youtube->returnVideoContent($tutorials);
-        return view('tutorial.search')->with(compact('tutorials', 'videos'));
     }
 
     public function uploadSubmit(Request $request){

@@ -32,11 +32,47 @@
                     <a class="navbar-toggle"><i class="fa fa-bars"></i></a>
                     <a href="{{ url('/home') }}" class="logo"><img src="/../img/logo.png" alt="Tutoriube - eSports Tutorials Center"></a>
                     <nav class="nav">
-
+                        <ul>
+                            <li class="has-dropdown mega-menu mega-games">
+                                <a href="games.html">Jogos</a>
+                                <ul>
+                                    <li>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="img">
+                                                        <a href="game-post.html"><img src="/img/menu/menu-1.jpg" alt="Last of Us: Part 2"></a>
+                                                        <span class="badge badge-pc">LOL</span>
+                                                    </div>
+                                                    <h4><a href="game-post.html">League of Legends</a></h4>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="img">
+                                                        <a href="game-post.html"><img src="/img/menu/menu-2.jpg" alt="Injustice 2"></a>
+                                                        <span class="badge badge-steam">CS GO</span>
+                                                    </div>
+                                                    <h4><a href="game-post.html">Counter Strike - Global Offensive</a></h4>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="img">
+                                                        <a href="game-post.html"><img src="/img/menu/menu-3.jpg" alt="Bioshock: Infinite"></a>
+                                                        <span class="badge badge-ps4">PUBG</span>
+                                                    </div>
+                                                    <h4><a href="game-post.html">Player Unknown's Battlegrounds</a></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
 
                 <div class="nav navbar-right">
+                    <ul>
+                        <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
+                    </ul>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li class="hidden-xs-down">
@@ -45,25 +81,25 @@
                             </a>
                         </li>
                     @else
+                        <ul>
+                            <li><a href="{{ url('tutorial/upload/video') }}"> <i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;</a></li>
+                        </ul>
                         <li class="dropdown dropdown-profile">
                             <a href="login.html" data-toggle="dropdown"><img src="{{session('google_user_avatar')}}" alt="">
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{  url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-envelope-open"></i> Inbox</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Games</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{  url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Profile</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope-open"></i> Inbox</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Games</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a>
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </div>
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
                         </li>
-                        @endif
-                    <ul>
-                        <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
-                    </ul>
+                    @endif
                 </div>
             </div>
         </div>

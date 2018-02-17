@@ -34,7 +34,7 @@
                     <nav class="nav">
                         <ul>
                             <li class="has-dropdown mega-menu mega-games">
-                                <a href="games.html">Jogos</a>
+                                <a>Jogos</a>
                                 <ul>
                                     <li>
                                         <div class="container">
@@ -64,6 +64,9 @@
                                         </div>
                                     </li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="{{ url('/community') }}">Sugestões</a>
                             </li>
                         </ul>
                     </nav>

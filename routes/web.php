@@ -47,3 +47,6 @@ Route::post('/channel/subscribe', 'HandleUserActionController@subscribeUserToCha
 Route::post('/channel/unsubscribe', 'HandleUserActionController@unsubscribeUserFromChannel')->name('user.unsubscribe');
 
 Route::post('/user/rating', 'HandleUserActionController@tutorialRating')->name('tutorial.rating');
+
+Route::get('/community', 'CommunitySugestionsController@index')->name('community.show');
+Route::post('/community', 'CommunitySugestionsController@store')->name('community.show');

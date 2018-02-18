@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->string('admin')->nullable();
+            $table->boolean('admin')->default(0);
             $table->string('avatar')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitch')->nullable();

@@ -13,12 +13,16 @@
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
     <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+
     <!-- theme css -->
     <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" >
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
     @yield('header')
 </head>
@@ -121,6 +125,7 @@
 
 <!-- main -->
 @yield('content')
+@include('sweet::alert')
 <!-- /main -->
 
 <!-- footer -->

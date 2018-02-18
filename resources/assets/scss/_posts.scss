@@ -407,9 +407,14 @@
 .post-review {
   display: table;
   border-color: #e8e8e8;
+  width: 100%;
   margin-bottom: 23px;
   padding-bottom: 23px;
 
+  a{
+    color: #007bff;
+  }
+  
   > div {
     display: table-cell;
     vertical-align: top;
@@ -436,6 +441,7 @@
       font-size: 13px;
       font-weight: bold;
       box-shadow: 0 1px 1px 0 rgba(0,0,0, .3);
+      align-items: flex-end;
     }
   }
 

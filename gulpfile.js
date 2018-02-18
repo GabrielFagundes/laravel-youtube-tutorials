@@ -11,34 +11,40 @@ var gulp = require('gulp'),
 
 gulp.task('sass', function () {
   gulp.src('./resources/assets/scss/*.scss')
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(gulp.dest('./public/css'))
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./public/css'))
-    .pipe(reload({stream:true}));
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(gulp.dest('./public/css'))
+      .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(rename({suffix: '.min'}))
+      .pipe(gulp.dest('./public/css'))
+      .pipe(reload({stream:true}));
 });
 
 gulp.task('js', function() {
   gulp.src('./resources/assets/js/theme.js')
-    .pipe(gulp.dest('../public/js/'))
-    .pipe(concat('theme.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('../public/js/'))
-    .pipe(reload({stream:true}));
+      .pipe(gulp.dest('../public/js/'))
+      .pipe(concat('theme.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('./public/js/'))
+      .pipe(reload({stream:true}));
+});
+
+gulp.task('sweet', function() {
+  gulp.src('node_modules/sweetalert/dist/sweetalert.min.js')
+      .pipe(concat('custom.js'))
+      .pipe(gulp.dest('./public/js/'));
 });
 
 gulp.task('build-sass', function () {
   gulp.src('./resources/assets/scss/*.scss')
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(gulp.dest('../public/css'))
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./public/css'));
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(gulp.dest('../public/css'))
+      .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(rename({suffix: '.min'}))
+      .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('browser-sync', function() {

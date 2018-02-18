@@ -9,4 +9,9 @@ class Category extends Model
     public function tutorials(){
         return $this->hasMany('App\Tutorial');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

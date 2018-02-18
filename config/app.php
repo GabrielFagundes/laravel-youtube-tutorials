@@ -170,6 +170,7 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
         willvincent\Rateable\RateableServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,7 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
 
     ],
 

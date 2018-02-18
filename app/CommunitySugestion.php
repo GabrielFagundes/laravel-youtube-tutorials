@@ -18,6 +18,10 @@ class CommunitySugestion extends Model
 
         $sugestion->user_id = $user->id;
 
+        if ($user->isAdmin()){
+            $sugestion->approve();
+        }
+
         return $sugestion;
 
     }
@@ -25,6 +29,24 @@ class CommunitySugestion extends Model
     public function contribute($attributes){
 
         return $this->fill($attributes)->save();
+
+    }
+
+    public function scopeForCategory($builder, $category){
+
+        if ($category){
+            return $builder->where('category_id', $category->id);
+        }
+
+        return $builder;
+
+    }
+
+    public function approve(){
+
+        $this->approved = true;
+
+        return $this;
 
     }
 

@@ -51,3 +51,5 @@ Route::post('/user/rating', 'HandleUserActionController@tutorialRating')->name('
 Route::get('/community', 'CommunitySugestionsController@index')->name('community.show');
 Route::post('/community', 'CommunitySugestionsController@store')->name('community.store');
 Route::get('/community/{category}', 'CommunitySugestionsController@index');
+
+Route::post('votes/{sugestion}', 'VotesController@store');

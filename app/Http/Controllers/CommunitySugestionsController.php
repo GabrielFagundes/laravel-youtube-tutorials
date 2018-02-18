@@ -16,14 +16,17 @@ class CommunitySugestionsController extends Controller
 
 
 
-        $sugestions = CommunitySugestion::forCategory($category)
+        $sugestions = CommunitySugestion::with('votes')
+            ->forCategory($category)
             ->where('approved' , 1)
             ->latest()
-            ->paginate(3);
+            ->paginate(10);
+
+
 
         $categories = Category::orderBy('description')->get();
 
-        return view('community.index', compact('sugestions', 'categories'));
+        return view('community.index', compact('sugestions', 'categories', 'category'));
 
     }
 

@@ -62,4 +62,8 @@ class CommunitySugestion extends Model
 
     }
 
+    public function votes(){
+        return $this->hasMany(CommunitySugestionVote::class, 'community_sugestion_id');
+    }
+
 }

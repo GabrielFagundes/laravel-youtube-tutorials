@@ -37,4 +37,23 @@ class User extends Authenticatable
 
     }
 
+    public function votes(){
+
+        return $this->belongsToMany(CommunitySugestion::class, 'community_sugestions_votes')
+            ->withTimestamps();
+
+    }
+
+    public function voteFor(CommunitySugestion $sugestion){
+
+        $this->votes()->attach($sugestion);
+
+    }
+
+    public function votedFor(CommunitySugestion $sugestion){
+
+        return $sugestion->votes->contains('user_id', $this->id);
+
+    }
+
 }

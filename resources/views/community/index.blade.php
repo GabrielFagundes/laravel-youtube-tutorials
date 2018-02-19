@@ -12,28 +12,38 @@
                 @if($category)
                     <span>&mdash; <h5>{{ $category->description }}</h5></span>
                 @endif
-
             </div>
+
+            <div class="row col-lg-12" >
+                <button class="btn btn-info btn-xs">
+                    <a class="nav-link active" href="{{ request()->url() }}" >Mais recentes</a>
+                </button>
+                <button class="btn btn-facebook btn-xs">
+                    <a class="nav-link active" href="?popular" >Mais votados</a>
+                </button>
+            </div>
+            <br>
             <div class="row">
                 <div class="col-lg-8">
                     <ul class="sugestions" style="padding-bottom: 3%">
                         @if(count($sugestions))
                             @foreach($sugestions as $sugestion)
                                 <div class="post post-review">
+                                    <div class="votes">
 
-                                    <form action="{{ url('votes' . $sugestion->id) }}) }}" method="post">
-                                        {{ csrf_field() }}
+                                        <form action="{{ url('votes/' . $sugestion->id) }}) }}" method="post">
+                                            {{ csrf_field() }}
 
-                                        <button class="btn {{ Auth::check() && Auth::user()->votedFor($sugestion) ? 'btn-success' : 'btn-default' }}">
-                                            {{ $sugestion->votes->count() }}
-                                        </button>
+                                            <button type="submit" class="btn {{ Auth::check() &&
+                                        Auth::user()->votedFor($sugestion) ? 'btn-success' : 'btn-default' }}"
+                                                    {{ Auth::guest() ? 'disabled' : ''}}>
+                                                {{ $sugestion->votes->count() }}
+                                            </button>
 
-                                    </form>
+                                        </form>
+                                    </div>
 
-
-                                    @if(Auth::check() && Auth::user()->votedFor($sugestion))
-                                        +1
-                                    @endif
+                                    <a href="{{ url('/community/' . $sugestion->category->slug)}}" class="badge badge-pc" style="margin-right:1em; background: {{ $sugestion->category->color }};color: white;">{{ $sugestion->category->slug }}</a>
 
                                     {{ $sugestion->title }}
 
@@ -41,7 +51,6 @@
                                         Sugestão de: <a href="{{ url('profile/'.$sugestion->user->id)}}">{{ $sugestion->user->name }}</a> {{ $sugestion->updated_at->diffforhumans() }}
                                     </small>
 
-                                    <a href="{{ url('/community/' . $sugestion->category->slug)}}" class="badge badge-pc" style="background: {{ $sugestion->category->color }};color: white;">{{ $sugestion->category->slug }}</a>
                                 </div>
                             @endforeach
                         @else
@@ -50,7 +59,7 @@
                     </ul>
                     <div class="pagination-results m-t-0 m-b-40">
                         <nav aria-label="Page navigation">
-                            {{ $sugestions->links() }}
+                            {{ $sugestions->appends(request()->query())->links() }}
                         </nav>
                     </div>
 

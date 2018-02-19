@@ -14,15 +14,14 @@ class CommunitySugestionsController extends Controller
 {
     public function index(Category $category = null){
 
+        $orderBy = request()->exists('popular') ? 'votes_count' : 'updated_at';
 
-
-        $sugestions = CommunitySugestion::with('votes')
+        $sugestions = CommunitySugestion::with('user', 'category')
+            ->withCount('votes')
             ->forCategory($category)
             ->where('approved' , 1)
-            ->latest()
+            ->orderBy($orderBy, 'desc')
             ->paginate(10);
-
-
 
         $categories = Category::orderBy('description')->get();
 

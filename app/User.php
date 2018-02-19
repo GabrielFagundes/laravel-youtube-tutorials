@@ -44,12 +44,6 @@ class User extends Authenticatable
 
     }
 
-    public function voteFor(CommunitySugestion $sugestion){
-
-        $this->votes()->attach($sugestion);
-
-    }
-
     public function votedFor(CommunitySugestion $sugestion){
 
         return $sugestion->votes->contains('user_id', $this->id);

@@ -46,6 +46,8 @@ class ProfileController extends Controller
         $tutorials = Tutorial::where('user_id', $user->id)->orderBy('id', 'DESC')->limit(12)->get();
         $videos = $youtube->returnVideoContent($tutorials);
 
+        $user->avgUserRating = $this->getUserAvgRating($id);
+
         return view('user.profile.videos')->with(compact('tutorials', 'videos', 'user', 'checkSubscriber'));
 
     }
@@ -139,6 +141,29 @@ class ProfileController extends Controller
         $user->save();
 
         return back();
+    }
+
+    public function getUserAvgRating($user_id){
+        $i = 0;
+        $rating[] = '';
+        $tutorials = Tutorial::where('user_id', $user_id)->get();
+
+//        dd($tutorials);
+        if ($tutorials->count() > 0){
+            foreach ($tutorials as $tutorial){
+                $rating[$i] = $tutorial->averageRating;
+                $i++;
+            }
+            $rating = array_filter($rating);
+            if (count($rating) > 0){
+                $avgUserRating = array_sum($rating)/count($rating);
+                return $avgUserRating;
+            }else{
+                return null;
+            }
+        }
+
+        return null;
     }
 
 }

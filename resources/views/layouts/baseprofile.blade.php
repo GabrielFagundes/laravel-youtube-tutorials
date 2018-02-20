@@ -24,6 +24,13 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
+
+    {{--CSS e JS para exibir o rating do usuário--}}
+    <link href="{{ asset('css/star-rating.min.css') }}" rel="stylesheet" >
+    <link href="{{ asset('themes/krajee-fa/theme.min.css') }}" rel="stylesheet" >
+    <script src="{{ asset('js/star-rating.min.js') }}"></script>
+    <script src="{{ asset('js/locales/pt-BR.js') }}"></script>
+    <script src="{{ asset('themes/krajee-fa/theme.min.js') }}"></script>
     @yield('header')
 </head>
 
@@ -129,6 +136,9 @@
     <div class="container">
         <div class="hero-block">
             <h5>{{ $user->name }}</h5>
+            <br><br>
+            <input id="star-rating" name="star-rating" class="kv-ltr-theme-fa-star rating-loading"
+                   value="{{ $user->avgUserRating }}" dir="ltr" data-size="xs">
             @if(Auth::user())
                 @if($user->id != Auth::user()->id)
                     <div id="sub-btn"  data-id="" data-url="" data-action="">
@@ -212,7 +222,6 @@
 
 <!-- Scripts -->
 @yield('footer')
-<script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
@@ -265,6 +274,17 @@
                     }
                 }
             });
+        });
+
+        //            Eventos relacionados ao rating do vídeo
+        $('#star-rating').rating({
+            hoverOnClear: false,
+            theme: 'krajee-fa',
+            filledStar: '<i class="fa fa-gamepad"></i>',
+            emptyStar: '<i class="fa fa-gamepad"></i>',
+            showCaption: false,
+            showClear: false,
+            displayOnly: true,
         });
     });
 

@@ -42,11 +42,6 @@ class HandleUserActionController extends Controller
         }catch (\mysqli_sql_exception $e){
             return \GuzzleHttp\json_encode('Ocorreu um erro ao tentar gravar o rating');
         }
-
-
-//        dd(Tutorial::find($tutorial_id)->ratings);
-
-
     }
 
 }

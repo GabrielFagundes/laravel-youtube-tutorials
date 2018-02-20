@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- meta -->
     <meta charset="utf-8">
@@ -13,13 +13,20 @@
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
     <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+
     <!-- theme css -->
     <link href="{{ asset('css/theme.min.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" >
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
     @yield('header')
 </head>
+
 <body>
 
 <header id="header">
@@ -28,12 +35,52 @@
             <div class="navbar">
                 <div class="navbar-left">
                     <a class="navbar-toggle"><i class="fa fa-bars"></i></a>
-                    <a href="{{ url('/home') }}" class="logo"><img src="../img/logo.png" alt="Tutoriube - eSports Tutorials Center"></a>
+                    <a href="{{ url('/home') }}" class="logo"><img src="/../img/logo.png" alt="Tutoriube - eSports Tutorials Center"></a>
                     <nav class="nav">
-
+                        <ul>
+                            <li class="has-dropdown mega-menu mega-games">
+                                <a>Jogos</a>
+                                <ul>
+                                    <li>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="img">
+                                                        <a href="game-post.html"><img src="/img/menu/menu-1.jpg" alt="Last of Us: Part 2"></a>
+                                                        <span class="badge badge-pc">LOL</span>
+                                                    </div>
+                                                    <h4><a href="game-post.html">League of Legends</a></h4>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="img">
+                                                        <a href="game-post.html"><img src="/img/menu/menu-2.jpg" alt="Injustice 2"></a>
+                                                        <span class="badge badge-steam">CS GO</span>
+                                                    </div>
+                                                    <h4><a href="game-post.html">Counter Strike - Global Offensive</a></h4>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="img">
+                                                        <a href="game-post.html"><img src="/img/menu/menu-3.jpg" alt="Bioshock: Infinite"></a>
+                                                        <span class="badge badge-ps4">PUBG</span>
+                                                    </div>
+                                                    <h4><a href="game-post.html">Player Unknown's Battlegrounds</a></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{{ url('/community') }}">Sugestões</a>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
+
                 <div class="nav navbar-right">
+                    <ul>
+                        <li><a data-toggle="search"><i class="fa fa-search"></i></a></li>
+                    </ul>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li class="hidden-xs-down">
@@ -42,32 +89,33 @@
                             </a>
                         </li>
                     @else
+                        <ul>
+                            <li><a href="{{ url('tutorial/upload/video') }}"> <i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;</a></li>
+                        </ul>
                         <li class="dropdown dropdown-profile">
                             <a href="login.html" data-toggle="dropdown"><img src="{{session('google_user_avatar')}}" alt="">
-                                <span>{{ Auth::user()->name }}</span></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{{  url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-envelope-open"></i> Inbox</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Games</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Perfil</a>
+                                    <a class="dropdown-item" href="{{ url('/profile/user/completeprofile') }}"><i class="fa fa-cog"></i> Dados do perfil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a>
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </div>
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
                         </li>
                     @endif
                 </div>
             </div>
-            <div class="navbar-search">
-                <div class="container">
-                    <form method="post">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <i class="fa fa-times close"></i>
-                    </form>
-                </div>
+        </div>
+        <div class="navbar-search">
+            <div class="container">
+                <form method="post" action="{{ url('/search/video') }}">
+                    {{ csrf_field() }}
+                    <input id="busca" name="busca" type="text" class="form-control" placeholder="Qual tutorial você está buscando?">
+                    <i class="fa fa-times close"></i>
+                </form>
             </div>
         </div>
     </div>
@@ -81,44 +129,42 @@
     <div class="container">
         <div class="hero-block">
             <h5>{{ $user->name }}</h5>
-            <a class="btn btn-primary btn-sm btn-shadow btn-rounded btn-icon btn-add" href="{{ route('profile.update') }}" data-toggle="tooltip" title="Completar dados" role="button"><i class="fa fa-user-plus"></i>&nbsp; Complete seus dados</a>
-        </div>
-    </div>
-</section>
+            @if(Auth::user())
+                @if($user->id != Auth::user()->id)
+                    <div id="sub-btn"  data-id="" data-url="" data-action="">
+                        <a id="sub-label" class="btn btn-youtube btn-sm btn-shadow btn-rounded btn-add" style="color: white;">
+                            <i class="fa fa-youtube-play"></i> Inscrever-se</a>
+                    </div>
+                @endif
+            @else
+                <div id="sub-btn"  data-id="" data-url="" data-action="">
+                    <a id="sub-label" href="{{ url('auth/google') }}"
+                       class="btn btn-youtube btn-sm btn-shadow btn-rounded btn-icon btn-add" style="color: white;>Inscrever-se</a>
+                            </div>
+                    @endif
 
-<!-- section-toolbar -->
-<section class="toolbar toolbar-profile" data-fixed="true">
-    <div class="container">
-        <div class="profile-avatar">
-            <a href="#"><img src="{{ $user->avatar }}" alt=""></a>
-            <div class="sticky">
-                <a href="#"><img src="img/user/avatar-sm.jpg" alt=""></a>
-                <div class="profile-info">
-                    <h5>{{ $user->name }}</h5>
-                    <span>@nathan</span>
-                </div>
-            </div>
-        </div>
-        <div class="dropdown float-right hidden-md-down">
-            <a class="btn btn-secondary btn-icon btn-sm m-l-25 float-right" href="#" data-toggle="dropdown" role="button"><i class="fa fa-cog"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item active" href="#">Setting</a>
-                <a class="dropdown-item" href="#">Mail</a>
-                <a class="dropdown-item" href="#">Report</a>
-                <a class="dropdown-item" href="#">Block</a>
-            </div>
-        </div>
-        <ul class="toolbar-nav hidden-md-down">
-            <li class="active"><a href="#">Timeline</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Games (38)</a></li>
-            <li><a href="#">Friends (628)</a></li>
-            <li><a href="#">Images (23)</a></li>
-            <li><a href="#">Videos</a></li>
-            <li><a href="#">Groups</a></li>
-            <li><a href="#">Forums</a></li>
-        </ul>
-    </div>
+                            </div>
+                            </div>
+                            </section>
+
+                            <!-- section-toolbar -->
+                            <section class="toolbar toolbar-profile" data-fixed="true">
+                    <div class="container">
+                        <div class="profile-avatar">
+                            <a href="#"><img src="{{ $user->avatar }}" alt=""></a>
+                            <div class="sticky">
+                                <div class="profile-info">
+                                    <h5>{{ $user->name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="toolbar-nav hidden-md-down">
+                            <li class="{{ ($menu == 'videos') ? 'active' : '' }}"><a href="{{ url('profile/' . $user->id) }}">Vídeos</a></li>
+                            @if(Auth::user()->id == $user->id)
+                                <li class="{{ ($menu == 'settings') ? 'active' : '' }}"><a href="user/completeprofile/">Configurações</a></li>
+                            @endif
+                        </ul>
+                    </div>
 </section>
 
 <section class="p-y-30">
@@ -127,23 +173,25 @@
             <div class="col-lg-3 hidden-md-down">
                 <!-- widget about -->
                 <div class="widget widget-about">
-                    <h5 class="widget-title">Bio</h5>
+                    @if($user->description)
+                        <h5 class="widget-title">Sobre mim</h5>
+                    @endif
                     <p>{{ $user->description }}</p>
                     <ul>
                         @if($user->city)
                             <li><i class="fa fa-map-marker"></i> {{ $user->city }} </li>
                         @endif
                         @if($user->facebook)
-                            <li><a href="#" target="_blank"><i class="fa fa-facebook"></i> {{ $user->facebook }} </a></li>
+                            <li><a href="https://facebook.com/{{ $user->facebook }}" target="_blank"><i class="fa fa-facebook"></i> {{ $user->facebook }} </a></li>
                         @endif
                         @if($user->twitch)
-                            <li><a href="#" target="_blank"><i class="fa fa-twitch"></i> {{ $user->twitch }} </a></li>
+                            <li><a href="https://twitch.com/{{ $user->twitch }}" target="_blank"><i class="fa fa-twitch"></i> {{ $user->twitch }} </a></li>
                         @endif
                         @if($user->youtube)
-                            <li><a href="#" target="_blank"><i class="fa fa-youtube-play"></i> {{ $user->youtube }} </a></li>
+                            <li><a href="https://youtube.com/{{ $user->youtube }}" target="_blank"><i class="fa fa-youtube-play"></i> {{ $user->youtube }} </a></li>
                         @endif
                         @if($user->twitter)
-                            <li><a href="#" target="_blank"><i class="fa fa-twitter"></i> {{ $user->twitter }} </a></li>
+                            <li><a href="https://twitter.com/{{ $user->twitter }}" target="_blank"><i class="fa fa-twitter"></i> {{ $user->twitter }} </a></li>
                         @endif
                     </ul>
                 </div>
@@ -151,6 +199,7 @@
             </div>
 
             @yield('content')
+            @include('sweet::alert')
 
         </div>
     </div>
@@ -167,7 +216,70 @@
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-<!-- theme js -->
-<script src="{{ asset('js/theme.min.js') }}"></script>
+<script>
+
+    function setSubscribeButton() {
+        $('#sub-label').text('Inscrever-se');
+        $('#sub-btn').data('id', '{{ $user->channel_id }}');
+        $('#sub-btn').data('url', '/channel/subscribe');
+        $('#sub-btn').data('action', 'subscribe');
+    }
+
+    function setUnsubscribeButton() {
+        $('#sub-label').text('Inscrito');
+        $('#sub-label').prepend('<i class="fa fa-check-circle' + '"></i> ')
+        $('#sub-btn').data('id', '{{ $checkSubscriber }}');
+        $('#sub-btn').data('url', '/channel/unsubscribe');
+        $('#sub-btn').data('action', 'unsubscribe');
+        $('#sub-label').removeClass('subscribe');
+        $('#sub-label').addClass('subscribed');
+    }
+
+    $(document).ready(function(){
+
+        $(document).on('click','#sub-btn',function(){
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+            var setButton = $(this).data('action');
+
+            if (setButton == 'subscribe'){
+                setUnsubscribeButton();
+            }else{
+                setSubscribeButton();
+            }
+
+            $.ajax({
+                url : url,
+                method : "POST",
+                data : {id:id, _token:"{{csrf_token()}}"},
+                dataType : "json",
+                success : function (data)
+                {
+                    if(data != '')
+                    {
+                        console.log('Ação realizada com sucesso!');
+                    }
+                    else
+                    {
+                        alert('Não recebemos o retorno do Youtube para sua inscrição.');
+                    }
+                }
+            });
+        });
+    });
+
+
+</script>
+
+@if(!$checkSubscriber)
+    <script>
+        setSubscribeButton();
+    </script>
+@else
+    <script>
+        setUnsubscribeButton()
+    </script>
+@endif
+
 </body>
 </html>

@@ -94,10 +94,8 @@
                         <li class="dropdown dropdown-profile">
                             <a href="login.html" data-toggle="dropdown"><img src="{{session('google_user_avatar')}}" alt="">
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{  url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-envelope-open"></i> Inbox</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-heart"></i> Games</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
+                                    <a class="dropdown-item" href="{{ url('/profile/'. Auth::user()->id) }}"><i class="fa fa-user"></i> Perfil</a>
+                                    <a class="dropdown-item" href="{{ url('/profile/user/completeprofile') }}"><i class="fa fa-cog"></i> Dados do perfil</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ url('/logout') }}" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a>

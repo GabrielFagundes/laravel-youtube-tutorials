@@ -30,7 +30,10 @@ class HomeController extends Controller
         $tutorials = Tutorial::orderBy('id', 'DESC')->limit(12)->get();
         $videos = $youtube->returnVideoContent($tutorials);
 
-        return view('home')->with(compact('tutorials', 'videos'));
+        $relativeTutorials = Tutorial::orderBy('id', 'DESC')->limit(4)->get();
+        $relativeVideos = $youtube->returnVideoContent($relativeTutorials);
+
+        return view('home')->with(compact('tutorials', 'videos', 'relativeVideos'));
     }
 
     public function loadDataAjax(Request $request){

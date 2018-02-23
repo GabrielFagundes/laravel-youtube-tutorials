@@ -35,8 +35,7 @@ class CommunitySugestionsController extends Controller
 
         $this->validate($request, [
             'category_id' => 'required|exists:categories,id',
-            'title' => 'required',
-            'description' => 'required'
+            'sugestion' => 'required|max:100'
         ]);
 
         CommunitySugestion::from($user)->contribute($request->all());

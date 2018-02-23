@@ -13,7 +13,7 @@
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="card card-video">
                             <div class="card-img upload">
-                                <form name="post_tutorial[{{  $video->getSnippet()->getResourceId()->getVideoId()  }}]" id="post_tutorial" action="{{url('/tutorial/upload/complete')}}" method="post">
+                                <form name="post_tutorial[{{  $video->getSnippet()->getResourceId()->getVideoId()  }}]" id="post_tutorial" action="{{url('/tutorial/upload/video')}}" method="post">
                                     {{ csrf_field() }}
                                     <a href="#" onclick="document.forms['post_tutorial[{{  $video->getSnippet()->getResourceId()->getVideoId()  }}]'].submit();">
                                         <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Thumbnail indisponível">

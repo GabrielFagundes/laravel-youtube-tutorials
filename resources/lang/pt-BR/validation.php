@@ -115,7 +115,10 @@ return [
         'title' => 'Título',
         'description' => 'Descrição',
         'category_id' => 'Jogo',
-        'city' => 'Cidade'
+        'city' => 'Cidade',
+        'sugestion' => 'Sugestão',
+        'subcategory' => 'Nível',
+        'category' => 'Jogo'
     ],
 
 ];

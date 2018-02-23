@@ -31,12 +31,10 @@ Route::post('profile/user/completeprofile', 'ProfileController@update')->name('p
 
 // upload routes
 
-Route::group(['prefix' => 'tutorial/upload',  'middleware' => 'auth'], function()
-{
-    Route::get('video', 'TutorialController@uploadIndex')->name('tutorial.video');
-    Route::post('complete', 'TutorialController@uploadCreate')->name('tutorial.upload');
-    Route::post('save', 'TutorialController@uploadSubmit')->name('tutorial.save');
-});
+Route::get('tutorial/upload/video', 'TutorialController@uploadIndex')->name('tutorial.video');
+Route::post('tutorial/upload/video', 'TutorialController@uploadCreate')->name('tutorial.upload');
+Route::post('tutorial/upload/save', 'TutorialController@uploadSubmit')->name('tutorial.save');
+
 
 Route::post('/search/video', 'TutorialController@search')->name('tutorial.search');
 Route::get('/search/video/{game}', 'TutorialController@searchByFilter')->name('tutorial.search.game');

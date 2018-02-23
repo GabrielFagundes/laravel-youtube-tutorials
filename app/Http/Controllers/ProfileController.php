@@ -148,7 +148,6 @@ class ProfileController extends Controller
         $rating[] = '';
         $tutorials = Tutorial::where('user_id', $user_id)->get();
 
-//        dd($tutorials);
         if ($tutorials->count() > 0){
             foreach ($tutorials as $tutorial){
                 $rating[$i] = $tutorial->averageRating;

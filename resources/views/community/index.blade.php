@@ -34,7 +34,7 @@
                                         <form action="{{ url('votes/' . $sugestion->id) }}) }}" method="post">
                                             {{ csrf_field() }}
 
-                                            <button type="submit" class="btn {{ Auth::check() &&
+                                            <button style="margin-top: -5px;" type="submit" class="btn {{ Auth::check() &&
                                         Auth::user()->votedFor($sugestion) ? 'btn-success' : 'btn-default' }}"
                                                     {{ Auth::guest() ? 'disabled' : ''}}>
                                                 {{ $sugestion->votes->count() }}
@@ -42,12 +42,12 @@
 
                                         </form>
                                     </div>
+                                    {{ $sugestion->sugestion }}
+                                    <a  href="{{ url('/community/' . $sugestion->category->slug)}}" class="badge badge-pc" style="float: right; background: {{ $sugestion->category->color }};color: white;">{{ $sugestion->category->slug }}</a>
 
-                                    <a href="{{ url('/community/' . $sugestion->category->slug)}}" class="badge badge-pc" style="margin-right:1em; background: {{ $sugestion->category->color }};color: white;">{{ $sugestion->category->slug }}</a>
+                                    <br>
 
-                                    {{ $sugestion->title }}
-
-                                    <small>
+                                    <small style="margin-left: 5em;">
                                         Sugestão de: <a href="{{ url('profile/'.$sugestion->user->id)}}">{{ $sugestion->user->name }}</a> {{ $sugestion->updated_at->diffforhumans() }}
                                     </small>
 
@@ -92,18 +92,11 @@
 
                                     </div>
 
-                                    <div class="form-group {{ $errors->has('title') ? 'has-danger' : '' }}">
-                                        <label for="title">Título:</label>
-                                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" placeholder="Qual é o título da sua sugestão de tutorial?" >
+                                    <div class="form-group {{ $errors->has('sugestion') ? 'has-danger' : '' }}">
+                                        <label for="sugestion">Sugestão:</label>
+                                        <textarea class="form-control" name="sugestion" id="sugestion" cols="50" rows="3" placeholder="Descreva sua sugestão em até 60 caracteres">{{ old('sugestion') }}</textarea>
 
-                                        {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
-                                    </div>
-
-                                    <div class="form-group {{ $errors->has('description') ? 'has-danger' : '' }}">
-                                        <label for="description">Descrição:</label>
-                                        <textarea class="form-control" name="description" id="description" cols="50" rows="3" placeholder="Descreva sua sugestão em até 144 caracteres">{{ old('description') }}</textarea>
-
-                                        {!! $errors->first('description', '<span class="help-block">:message</span>') !!}
+                                        {!! $errors->first('sugestion', '<span class="help-block">:message</span>') !!}
                                     </div>
 
                                     <div class="form-group">

@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Youtube;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class TutorialController extends Controller
 {
@@ -76,13 +77,11 @@ class TutorialController extends Controller
     }
 
     public function uploadSubmit(Request $request){
-
-        //echo 'teste'; exit;
-//
-//        $validatedData = $request->validate([
-//            'titulo'        => 'required|max:20',
-//            'description'   => 'required|max:1000',
-//        ]);
+//        dd($request);
+        $this->validate($request, [
+            'title' => 'required|max:40',
+            'description' => 'required|max:500',
+        ]);
 
         $user = User::where('id', Auth::user()->id)->first();
 
@@ -105,13 +104,11 @@ class TutorialController extends Controller
             $tutorial->save();
         }
         else {
-//            dd($tutorial);
-//            echo 'erro';
-//            exit;
-           return $erro = true;
+           $erro = 'já existe um tutorial com este vídeo';
         }
 
-        return redirect('home');
+
+        return back();
     }
 
 }

@@ -10,6 +10,10 @@ class Tutorial extends Model
 
     use Rateable;
 
+    protected $fillable =[
+        'title', 'link', 'description', 'user_id', 'category_id', 'subcategory_id'
+    ];
+
     public function user(){
         return $this->belongsTo('App\User');
     }

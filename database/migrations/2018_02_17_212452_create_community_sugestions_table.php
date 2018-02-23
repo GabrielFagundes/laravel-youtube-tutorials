@@ -17,8 +17,7 @@ class CreateCommunitySugestionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->integer('category_id')->index();
-            $table->string('title');
-            $table->string('description');
+            $table->string('sugestion');
             $table->boolean('approved')->default(0);
             $table->timestamps();
         });

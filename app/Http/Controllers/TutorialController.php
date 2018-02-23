@@ -73,6 +73,13 @@ class TutorialController extends Controller
         $categories = Category::all();
         $subcategories = Subcategory::all();
 
+        $tutorial = Tutorial::where('link', $video)->first();
+
+        if ($tutorial){
+            return back();
+        }
+
+
         return view('tutorial.completeupload')->with(compact('video', 'categories', 'subcategories', 'channel'));
     }
 
@@ -102,13 +109,15 @@ class TutorialController extends Controller
             $tutorial->user_id = Auth::user()->id;
 
             $tutorial->save();
+
+            Alert::success('Aguarde até que um de nossos administradores realize a aprovação para que o TUTORIAL seja publicado', 'Enviado!')->persistent("Ok");
         }
         else {
            $erro = 'já existe um tutorial com este vídeo';
         }
 
 
-        return back();
+        return redirect('/tutorial/upload/video');
     }
 
 }

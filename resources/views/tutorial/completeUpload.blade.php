@@ -11,7 +11,7 @@
 
                 <div class="form-group {{ $errors->has('title') ? 'has-danger' : '' }}">
                     <label for="title"><i class="fa fa-youtube"></i> Título</label>
-                    <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" maxlength="40" REQUIRED>
+                    <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" maxlength="40" required placeholder="Título do tutorial">
                     </input>
                     <small class="form-text">Este seráo título do vídeo que as pessoas visualizarão na tela inicial e no seu perfil.</small>
                     {!! $errors->first('title', '<span class="help-block">:message</span>') !!}

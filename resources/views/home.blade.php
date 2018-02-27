@@ -29,23 +29,26 @@
 
     <section class="bg-secondary p-t-15 p-b-5 p-x-15">
         <div class="owl-carousel owl-videos">
-            <div class="card card-video">
-                <div class="card-img">
-                    <a href="video-post.html">
-                        <img src="https://i1.ytimg.com/vi/GaERL8Nrl9k/mqdefault.jpg" alt="Tom Clancy's Ghost Recon: Wildlands">
-                    </a>
-                    <div class="card-meta">
-                        <span>4:32</span>
+
+            @foreach($bestVideos['items'] as $bestVideo)
+                <div class="card card-video">
+                    <div class="card-img">
+                        <a href="{{ url('/tutorial/'. $bestVideo->getId()) }}">
+                            <img src="{{ $bestVideo->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Imagem não disponível">
+                        </a>
+                        <div class="card-meta">
+                            <span>{{ convtime($bestVideo->getContentDetails()->getDuration()) }}</span>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <h4 class="card-title"><a href="{{ url('/tutorial/'. $bestVideo->getId()) }}">{{ getTitle($bestVideo->getId()) }}</a></h4>
+                        <div class="card-meta">
+                            <span><i class="fa fa-clock-o"></i> {{ formatDate($bestVideo->getSnippet()->getPublishedAt(), 'fromISO', $bestVideo->getId()) }} </span>
+                            <span>{{ $bestVideo->getStatistics()->getViewCount() }}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="card-block">
-                    <h4 class="card-title"><a href="video-post.html">Tom Clancy's Ghost Recon: Wildlands</a></h4>
-                    <div class="card-meta">
-                        <span><i class="fa fa-clock-o"></i> 2 hours ago</span>
-                        <span>423 views</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -67,7 +70,7 @@
                                         <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
                                     </a>
                                     <div class="card-meta">
-                                        <span>15:56</span>
+                                        <span>{{ convtime($video->getContentDetails()->getDuration()) }}</span>
                                     </div>
                                 </div>
                                 <div class="card-block">
@@ -102,14 +105,14 @@
                                     <img src="{{ $relativeVideo->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
                                 </a>
                                 <div class="card-meta">
-                                    <span>15:56</span>
+                                    <span>{{ convtime($relativeVideo->getContentDetails()->getDuration()) }}</span>
                                 </div>
                             </div>
                             <div class="card-block">
                                 <h4 class="card-title"><a href="{{ url('/tutorial/'. $relativeVideo->getId()) }}">{{ getTitle($relativeVideo->getId()) }}</a></h4>
                                 <div class="card-meta">
-                                    <span><i class="fa fa-clock-o"></i> {{ formatDate($relativeVideo->getSnippet()->getPublishedAt(), 'fromISO', $video->getId()) }}</span>
-                                    <span>{{ $video->getStatistics()->getViewCount() }} visualizações</span>
+                                    <span><i class="fa fa-clock-o"></i> {{ formatDate($relativeVideo->getSnippet()->getPublishedAt(), 'fromISO', $relativeVideo->getId()) }}</span>
+                                    <span>{{ $relativeVideo->getStatistics()->getViewCount() }} visualizações</span>
                                 </div>
                             </div>
                         </div>

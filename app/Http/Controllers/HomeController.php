@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Tutorial;
 use App\Youtube;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,17 +25,22 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category = null)
     {
 
         $youtube = new Youtube();
         $tutorials = Tutorial::orderBy('id', 'DESC')->limit(12)->get();
         $videos = $youtube->returnVideoContent($tutorials);
 
-        $relativeTutorials = Tutorial::orderBy('id', 'DESC')->limit(4)->get();
+        $relativeTutorials = Tutorial::where('category_id', 1)->limit(4)->get();
         $relativeVideos = $youtube->returnVideoContent($relativeTutorials);
 
-        return view('home')->with(compact('tutorials', 'videos', 'relativeVideos'));
+        $bestTutorials = $this->getBestTutorials();
+        $bestVideos = $youtube->returnVideoContent($bestTutorials);
+
+//        dd($bestVideos);
+
+        return view('home')->with(compact('tutorials', 'videos', 'relativeVideos', 'bestVideos'));
     }
 
     public function loadDataAjax(Request $request){
@@ -87,4 +94,22 @@ class HomeController extends Controller
         return $output;
 
         }
+
+    public function getBestTutorials(){
+
+        $result = DB::select("select tutorials.id, 
+                                     tutorials.title, 
+                                     tutorials.description, 
+                                     tutorials.link,
+                                     avg(ratings.rating) as avgrating from tutorials 
+                             join ratings
+                             on 	ratings.rateable_id = tutorials.id
+                             where tutorials.approved = 'S'
+                             group by tutorials.id, tutorials.title, tutorials.description
+                             order by avgrating desc
+                             limit 8");
+
+        return $result;
+    }
+
 }

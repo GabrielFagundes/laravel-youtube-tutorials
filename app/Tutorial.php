@@ -26,4 +26,14 @@ class Tutorial extends Model
         return $this->belongsTo('App\Subcategory');
     }
 
+    public function scopeForCategory($builder, $category){
+
+        if ($category){
+            return $builder->where('category_id', $category->id);
+        }
+
+        return $builder;
+
+    }
+
 }

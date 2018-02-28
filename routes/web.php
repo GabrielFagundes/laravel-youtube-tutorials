@@ -37,7 +37,7 @@ Route::post('tutorial/upload/save', 'TutorialController@uploadSubmit')->name('tu
 
 
 Route::post('/search/video', 'TutorialController@search')->name('tutorial.search');
-Route::get('/search/video/{game}', 'TutorialController@searchByFilter')->name('tutorial.search.game');
+Route::get('/search/video/{category}', 'TutorialController@searchByFilter')->name('tutorial.search.game');
 
 Route::get('/tutorial/{videoid}', 'TutorialController@show')->name('tutorial.upload');
 

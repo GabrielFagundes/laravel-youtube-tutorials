@@ -3,8 +3,9 @@
   font-size: $font-size-sm;
   color: rgba(255, 255, 255, 0.4);
   padding: 65px 0 20px 0;
+  width: 100%;
   bottom: 0;
-  position: absolute;
+  position: relative;
 
   .footer-title {
     color: #fff;

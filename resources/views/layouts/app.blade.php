@@ -46,21 +46,21 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-lol.jpg" alt="League Of Legends"></a>
+                                                        <a href="{{ route('tutorial.search.game', 'LOL') }}"><img src="/img/menu/menu-lol.jpg" alt="League Of Legends"></a>
                                                         <span class="badge badge-pc">LOL</span>
                                                     </div>
                                                     <h4><a href="game-post.html">League of Legends</a></h4>
                                                 </div>
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-csgo.jpg" alt="Counter Strike Global Offensive"></a>
+                                                        <a href="{{ route('tutorial.search.game', 'CS-GO') }}"><img src="/img/menu/menu-csgo.jpg" alt="Counter Strike Global Offensive"></a>
                                                         <span class="badge badge-steam">CS GO</span>
                                                     </div>
                                                     <h4><a href="game-post.html">Counter Strike - Global Offensive</a></h4>
                                                 </div>
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-pubg.jpg" alt="Player Unkown's Battlegrounds"></a>
+                                                        <a href="{{ route('tutorial.search.game', 'PUBG') }}"><img src="/img/menu/menu-pubg.jpg" alt="Player Unkown's Battlegrounds"></a>
                                                         <span class="badge badge-ps4">PUBG</span>
                                                     </div>
                                                     <h4><a href="game-post.html">Player Unknown's Battlegrounds</a></h4>
@@ -127,9 +127,58 @@
 @include('sweet::alert')
 <!-- /main -->
 
-<!-- footer -->
 
+<!-- footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-5">
+                <h4 class="footer-title">SOBRE TUTORIUBE</h4>
+                <p>É um site que possibilita a criação de tutoriais com vídeos postados no <a href="http://youtube.com">Youtube</a> pelo usuário cadastrado</p>
+                <p>A aplicação busca facilitar a busca por tutoriais, assim como organizá-los através de classificações de qualidade e jogos</p>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <h4 class="footer-title">Jogos</h4>
+                <div class="row">
+                    <div class="col">
+                        <ul>
+                            <li><a href="{{ route('tutorial.search.game', 'LOL') }}">League of Legends</a></li>
+                            <li><a href="{{ route('tutorial.search.game', 'PUBG')  }}">Player Unknown's Battlegrounds</a></li>
+                            <li><a href="{{ route('tutorial.search.game', 'CS-GO')  }}">Counter Strike Global Offensive</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li><a href="{{ route('community.show') }}">Sugestões de Vídeos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <h4 class="footer-title">Inscreva-se</h4>
+                <p>Inscreva-se para receber avisos sobre novidades</p>
+                <div class="input-group m-t-25">
+                    <input type="text" class="form-control" placeholder="Email">
+                    <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Inscrever-se</button>
+          </span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-social">
+                <a href="https://facebook.com/gabrielfagundes.dev" target="_blank" data-toggle="tooltip" title="facebook"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/aluzgabriel" target="_blank" data-toggle="tooltip" title="twitter"><i class="fa fa-twitter"></i></a>
+                <a href="https://steamcommunity.com/id/silencekoiot" target="_blank" data-toggle="tooltip" title="steam"><i class="fa fa-steam"></i></a>
+                <a href="https://www.twitch.tv/origamid" target="_blank" data-toggle="tooltip" title="twitch"><i class="fa fa-twitch"></i></a>
+                <a href="https://www.youtube.com/user/ggta14" target="_blank" data-toggle="tooltip" title="youtube"><i class="fa fa-youtube"></i></a>
+            </div>
+            <p>Copyright &copy; 2017 <a href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730" target="_blank">Gameforest</a>. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 <!-- /footer -->
+
 
 <!-- Scripts -->
 <script src="{{ asset('plugins/popper/popper.min.js') }}"></script>

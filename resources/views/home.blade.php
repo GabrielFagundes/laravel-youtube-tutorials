@@ -55,7 +55,7 @@
     <section>
         <div class="container">
             <div class="heading">
-                <i class="fa fa-film"></i>
+                <i class="fa fa-youtube-play"></i>
                 <h2>Tutoriais Recentes</h2>
                 <p>Abaixo você poderá visualizar os últimos tutoriais postados</p>
             </div>

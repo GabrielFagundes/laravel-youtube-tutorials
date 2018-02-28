@@ -116,6 +116,7 @@ class ProfileController extends Controller
             $youtube = new Youtube;
             $checkSubscriber = $youtube->checkIsSubscriber($channelId);
         }
+        $user->avgUserRating = $this->getUserAvgRating($user->id);
 
         return view('user.profile.complete')->with(compact('user', 'checkSubscriber'));
     }

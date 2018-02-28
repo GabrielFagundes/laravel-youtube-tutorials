@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" xmlns="http://www.w3.org/1999/html">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <!-- meta -->
     <meta charset="utf-8">
@@ -12,6 +12,7 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
+    <link rel="shortcut icon" href="/img/icon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
     <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -24,16 +25,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
-
-    {{--CSS e JS para exibir o rating do usuário--}}
-    <link href="{{ asset('css/star-rating.min.css') }}" rel="stylesheet" >
-    <link href="{{ asset('themes/krajee-fa/theme.min.css') }}" rel="stylesheet" >
-    <script src="{{ asset('js/star-rating.min.js') }}"></script>
-    <script src="{{ asset('js/locales/pt-BR.js') }}"></script>
-    <script src="{{ asset('themes/krajee-fa/theme.min.js') }}"></script>
     @yield('header')
 </head>
-
 <body>
 
 <header id="header">
@@ -53,21 +46,21 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-1.jpg" alt="Last of Us: Part 2"></a>
+                                                        <a href="{{ route('tutorial.search.game', 'LOL') }}"><img src="/img/menu/menu-lol.jpg" alt="League Of Legends"></a>
                                                         <span class="badge badge-pc">LOL</span>
                                                     </div>
                                                     <h4><a href="game-post.html">League of Legends</a></h4>
                                                 </div>
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-2.jpg" alt="Injustice 2"></a>
+                                                        <a href="{{ route('tutorial.search.game', 'CS-GO') }}"><img src="/img/menu/menu-csgo.jpg" alt="Counter Strike Global Offensive"></a>
                                                         <span class="badge badge-steam">CS GO</span>
                                                     </div>
                                                     <h4><a href="game-post.html">Counter Strike - Global Offensive</a></h4>
                                                 </div>
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-3.jpg" alt="Bioshock: Infinite"></a>
+                                                        <a href="{{ route('tutorial.search.game', 'PUBG') }}"><img src="/img/menu/menu-pubg.jpg" alt="Player Unkown's Battlegrounds"></a>
                                                         <span class="badge badge-ps4">PUBG</span>
                                                     </div>
                                                     <h4><a href="game-post.html">Player Unknown's Battlegrounds</a></h4>
@@ -135,7 +128,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="hero-block">
-            <h5>{{ $user->name }}</h5>
+            <h5><a href="{{ route('profile.show', $user->id) }}">{{ $user->name }}</a></h5>
             <br><br>
             <input id="star-rating" name="star-rating" class="kv-ltr-theme-fa-star rating-loading"
                    value="{{ $user->avgUserRating }}" dir="ltr" data-size="xs">
@@ -161,7 +154,7 @@
                             <section class="toolbar toolbar-profile" data-fixed="true">
                     <div class="container">
                         <div class="profile-avatar">
-                            <a href="#"><img src="{{ $user->avatar }}" alt=""></a>
+                            <a href="{{ route('profile.show', $user->id) }}"><img src="{{ $user->avatar }}" alt=""></a>
                             <div class="sticky">
                                 <div class="profile-info">
                                     <h5>{{ $user->name }}</h5>
@@ -175,6 +168,9 @@
                             @endif
                         </ul>
                     </div>
+                </div>
+        </div>
+    </div>
 </section>
 
 <section class="p-y-30">
@@ -218,6 +214,55 @@
 
 <!-- footer -->
 
+<!-- footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-5">
+                <h4 class="footer-title">SOBRE TUTORIUBE</h4>
+                <p>É um site que possibilita a criação de tutoriais com vídeos postados no <a href="http://youtube.com">Youtube</a> pelo usuário cadastrado</p>
+                <p>A aplicação busca facilitar a busca por tutoriais, assim como organizá-los através de classificações de qualidade e jogos</p>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <h4 class="footer-title">Jogos</h4>
+                <div class="row">
+                    <div class="col">
+                        <ul>
+                            <li><a href="{{ route('tutorial.search.game', 'LOL') }}">League of Legends</a></li>
+                            <li><a href="{{ route('tutorial.search.game', 'PUBG')  }}">Player Unknown's Battlegrounds</a></li>
+                            <li><a href="{{ route('tutorial.search.game', 'CS-GO')  }}">Counter Strike Global Offensive</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li><a href="{{ route('community.show') }}">Sugestões de Vídeos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <h4 class="footer-title">Inscreva-se</h4>
+                <p>Inscreva-se para receber avisos sobre novidades</p>
+                <div class="input-group m-t-25">
+                    <input type="text" class="form-control" placeholder="Email">
+                    <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Inscrever-se</button>
+          </span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-social">
+                <a href="https://facebook.com/gabrielfagundes.dev" target="_blank" data-toggle="tooltip" title="facebook"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/aluzgabriel" target="_blank" data-toggle="tooltip" title="twitter"><i class="fa fa-twitter"></i></a>
+                <a href="https://steamcommunity.com/id/silencekoiot" target="_blank" data-toggle="tooltip" title="steam"><i class="fa fa-steam"></i></a>
+                <a href="https://www.twitch.tv/origamid" target="_blank" data-toggle="tooltip" title="twitch"><i class="fa fa-twitch"></i></a>
+                <a href="https://www.youtube.com/user/ggta14" target="_blank" data-toggle="tooltip" title="youtube"><i class="fa fa-youtube"></i></a>
+            </div>
+            <p>Copyright &copy; 2017 <a href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730" target="_blank">Gameforest</a>. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 <!-- /footer -->
 
 <!-- Scripts -->

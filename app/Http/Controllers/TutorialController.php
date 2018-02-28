@@ -32,11 +32,21 @@ class TutorialController extends Controller
         return view('tutorial.search')->with(compact('tutorials', 'videos'));
     }
 
-    public function searchByFilter(Request $request){
+    public function searchByFilter(Category $category = null){
 
-        $filtro = $request->filtro;
+//        dd($category);
+
         $youtube = new Youtube();
 //        $tutorials = Tutorial::whereRaw('LOWER(`title`) LIKE ? ', ['%' .trim(strtolower($busca)).'%'])->orderby('id', 'DESC')->limit(12)->get();
+
+//        $orderBy = request()->exists('popular') ? 'votes_count' : 'updated_at';
+
+        $tutorials = Tutorial::with('category')
+            ->forCategory($category)
+            ->where('approved' , 'S')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
         $videos = $youtube->returnVideoContent($tutorials);
         return view('tutorial.search')->with(compact('tutorials', 'videos'));
 

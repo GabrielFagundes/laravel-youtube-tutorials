@@ -61,8 +61,11 @@ class HomeController extends Controller
 
                 $img = $video->getSnippet()->getThumbnails()->getMedium()->getUrl();
                 $url = url('/tutorial/'. $video->getId());
-                $title = $video->getSnippet()->getTitle();
+                $title = getTitle($video->getId());
                 $description = cutString($video->getSnippet()->getDescription());
+                $time = convtime($video->getContentDetails()->getDuration());
+                $views = $video->getStatistics()->getViewCount();
+                $publicated_at = formatDate($video->getSnippet()->getPublishedAt(), 'fromISO', $video->getId());
 
                 $output .= '<div class="col-12 col-sm-6 col-md-3">
                                 <div class="card card-video">
@@ -71,14 +74,14 @@ class HomeController extends Controller
                                             <img src="' . $img . ' ">
                                         </a>
                                         <div class="card-meta">
-                                            <span>15:56</span>
+                                            <span>' . $time . '</span>
                                         </div>
                                     </div>
                                     <div class="card-block">
                                         <h4 class="card-title"><a href="' . $url . '">' . $title . '</a></h4>
                                         <div class="card-meta">
-                                            <span><i class="fa fa-clock-o"></i> hora </span>
-                                            <span>6521 views</span>
+                                            <span><i class="fa fa-clock-o"></i>  </span>
+                                            <span>' . $views . '</span>
                                         </div>
                                         <p>' . $description . '</p>
                                     </div>

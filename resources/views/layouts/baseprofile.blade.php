@@ -140,7 +140,7 @@
             <input id="star-rating" name="star-rating" class="kv-ltr-theme-fa-star rating-loading"
                    value="{{ $user->avgUserRating }}" dir="ltr" data-size="xs">
             @if(Auth::user())
-                @if($user->id != Auth::user()->id)
+                @if($user->id != Auth::user()->id && $user->channel_id)
                     <div id="sub-btn"  data-id="" data-url="" data-action="">
                         <a id="sub-label" class="btn btn-youtube btn-sm btn-shadow btn-rounded btn-add" style="color: white;">
                             <i class="fa fa-youtube-play"></i> Inscrever-se</a>

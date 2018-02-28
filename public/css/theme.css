@@ -211,7 +211,7 @@ img {
   float: left;
   height: 62px;
   margin-right: 25px;
-  padding: 18px 0;
+  padding: 9px 0;
 }
 
 #header .container {
@@ -4498,7 +4498,7 @@ input[type="file"] {
 
 .card .card-img img {
   max-width: 100%;
-  max-height: 135px;
+  max-height: 160px;
 }
 
 .card .card-img .badge {

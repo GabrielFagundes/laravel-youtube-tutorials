@@ -12,6 +12,7 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
+    <link rel="shortcut icon" href="/img/icon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
     <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -45,21 +46,21 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-1.jpg" alt="Last of Us: Part 2"></a>
+                                                        <a href="game-post.html"><img src="/img/menu/menu-lol.jpg" alt="League Of Legends"></a>
                                                         <span class="badge badge-pc">LOL</span>
                                                     </div>
                                                     <h4><a href="game-post.html">League of Legends</a></h4>
                                                 </div>
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-2.jpg" alt="Injustice 2"></a>
+                                                        <a href="game-post.html"><img src="/img/menu/menu-csgo.jpg" alt="Counter Strike Global Offensive"></a>
                                                         <span class="badge badge-steam">CS GO</span>
                                                     </div>
                                                     <h4><a href="game-post.html">Counter Strike - Global Offensive</a></h4>
                                                 </div>
                                                 <div class="col">
                                                     <div class="img">
-                                                        <a href="game-post.html"><img src="/img/menu/menu-3.jpg" alt="Bioshock: Infinite"></a>
+                                                        <a href="game-post.html"><img src="/img/menu/menu-pubg.jpg" alt="Player Unkown's Battlegrounds"></a>
                                                         <span class="badge badge-ps4">PUBG</span>
                                                     </div>
                                                     <h4><a href="game-post.html">Player Unknown's Battlegrounds</a></h4>

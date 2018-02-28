@@ -25,7 +25,15 @@ class CommunitySugestionsController extends Controller
 
         $categories = Category::orderBy('description')->get();
 
-        return view('community.index', compact('sugestions', 'categories', 'category'));
+        if (request()->exists('popular')){
+            $active_popular = 'active';
+            $active_recent = '';
+        }else{
+            $active_recent = 'active';
+            $active_popular = '';
+        }
+
+        return view('community.index', compact('sugestions', 'categories', 'category', 'active_popular', 'active_recent'));
 
     }
 

@@ -14,14 +14,9 @@
                 @endif
             </div>
 
-            <div class="row col-lg-12" >
-                <button class="btn btn-info btn-xs">
-                    <a class="nav-link active" href="{{ request()->url() }}" >Mais recentes</a>
-                </button>
-                <button class="btn btn-facebook btn-xs">
-                    <a class="nav-link active" href="?popular" >Mais votados</a>
-                </button>
-            </div>
+            <a class="btn btn-outline-primary {{ $active_recent }}" href="{{ request()->url() }}" role="button">Recentes</a>
+            <a class="btn btn-outline-info {{ $active_popular }}" href="?popular" role="button">Populares</a>
+            <br>
             <br>
             <div class="row">
                 <div class="col-lg-8">

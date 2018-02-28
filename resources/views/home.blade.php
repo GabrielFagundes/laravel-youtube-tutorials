@@ -79,7 +79,6 @@
                                         <span><i class="fa fa-clock-o"></i> {{ formatDate($video->getSnippet()->getPublishedAt(), 'fromISO', $video->getId()) }}</span>
                                         <span>{{ $video->getStatistics()->getViewCount() }} visualizações</span>
                                     </div>
-                                    <p>{{ cutString($video->getSnippet()->getDescription()) }}</p>
                                 </div>
                             </div>
                         </div>

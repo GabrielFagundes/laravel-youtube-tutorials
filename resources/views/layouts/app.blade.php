@@ -173,7 +173,7 @@
                 <a href="https://www.twitch.tv/origamid" target="_blank" data-toggle="tooltip" title="twitch"><i class="fa fa-twitch"></i></a>
                 <a href="https://www.youtube.com/user/ggta14" target="_blank" data-toggle="tooltip" title="youtube"><i class="fa fa-youtube"></i></a>
             </div>
-            <p>Copyright &copy; 2017 <a href="https://themeforest.net/item/gameforest-responsive-gaming-html-theme/5007730" target="_blank">Gameforest</a>. All rights reserved.</p>
+            <p>Copyright &copy; 2018 Gabriel Fagundes. All rights reserved.</p>
         </div>
     </div>
 </footer>

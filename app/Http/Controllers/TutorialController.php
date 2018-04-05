@@ -110,6 +110,12 @@ class TutorialController extends Controller
         $tutorial = Tutorial::where('link', $request->video)->first();
 
         if (!$tutorial){
+
+            //Se está sendo inserido pelo administrador, o tutorial vai direto para as publicações,
+            // senão usa o valor default = N
+            if (!$user->isAdmin())
+                $tutorial->approved = 'S';
+
             $tutorial = new Tutorial;
             $tutorial->title = $request->title;
             $tutorial->description = $request->description;
@@ -118,16 +124,20 @@ class TutorialController extends Controller
             $tutorial->subcategory_id = $request->subcategory;
             $tutorial->user_id = Auth::user()->id;
 
+            //Salva o tutorial
             $tutorial->save();
-
-            Alert::success('Aguarde até que um de nossos administradores realize a aprovação para que o TUTORIAL seja publicado', 'Enviado!')->persistent("Ok");
         }
         else {
-           $erro = 'já existe um tutorial com este vídeo';
+            Alert::error('Houve um erro ao inserir o seu tutorial.');
         }
 
+        if (!$user->isAdmin())
+            Alert::info('Aguarde até que um de nossos administradores realize a aprovação para que o TUTORIAL seja publicado', 'Enviado!')->persistent("Ok");
+        else
+            Alert::success('Seu tutorial foi enviado e publicado.');
 
-        return redirect('/tutorial/upload/video');
+
+        return redirect('/');
     }
 
 }

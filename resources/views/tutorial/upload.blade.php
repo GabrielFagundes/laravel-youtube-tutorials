@@ -31,14 +31,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <hidden style="display: none;>{{ $noresult = false }}</hidden>
                         @endif
                     @endforeach
-                    @if($noresult == true)
-                        <center>
-                        <h1 style="padding-left: 120px;">Você ainda não possui vídeos enviados para o Youtube</h1>
-                        </center>
-                    @endif
                 </div>
             @else
                 <center>

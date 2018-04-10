@@ -6079,7 +6079,6 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .post .post-header > div {
   display: table-cell;
-  vertical-align: middle;
 }
 
 .post .post-header > div:first-child {

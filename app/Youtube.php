@@ -38,10 +38,6 @@ class Youtube
                     'maxResults' => 50
                 ));
 
-                //dd($playlistItemsResponse->getSnippet()->getPublishedAt());
-                //$playlistItemsResponse->getItems()->getSnippet()->getThumbnails()->getDefault()->getUrl();
-                //dd($playlistItemsResponse->getItems()->getSnippet()->getResourceId()->getVideoId());
-                //dd($playlistItemsResponse);
                 return $playlistItemsResponse;
             }
         }
@@ -75,23 +71,6 @@ class Youtube
             }
 
         }
-//            foreach ($videoResponse['items'] as $video){
-//                $durationISO = $video->getContentDetails()->getDuration();
-//                $di = new \DateInterval($durationISO);
-//                $string = '';
-//
-//                if ($di->h > 0) {
-//                    $string .= $di->h.':';
-//                }
-//                $duration = $string.$di->i.':'.$di->s;
-//                $viewCount = $video->getStatistics()->getViewCount();
-//
-//                $response = array(
-//                    'duration' => $duration,
-//                    'viewCount' => $viewCount);
-//            }
-//dd($videoResponse);
-
             return $videoResponse;
         }
 
@@ -138,7 +117,6 @@ class Youtube
             $google->redirectToProvider();
         }
 
-//        dd($subscriptionResponse);
         return $subscriptionResponse;
 
     }
@@ -190,7 +168,6 @@ class Youtube
             GoogleController::redirectToProvider();
         }
 
-//        dd($unsubscriptionResponse);
         return $unsubscriptionResponse;
 
     }

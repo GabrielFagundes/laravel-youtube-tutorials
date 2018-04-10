@@ -9,15 +9,15 @@
 @section('content')
 
     <!-- main -->
-    <section class="bg-image" style="background-image: url('https://img.youtube.com/vi/K5tRSwd-Sc0/maxresdefault.jpg');">
+    <section class="bg-image" style="background-image: url('https://tutoriube.dev/img/tutorial/background-home.jpg');">
         <div class="overlay"></div>
         <div class="container">
-            <div class="video-play" data-src="https://www.youtube.com/embed/i8qzBkHjk_0?rel=0&amp;amp;autoplay=1&amp;amp;showinfo=0">
+            <div class="video-play" data-src="https://www.youtube.com/embed/{{ $bestVideoHome->getId() }}?rel=0&amp;amp;autoplay=1&amp;amp;showinfo=0">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <img class="embed-responsive-item" src="https://img.youtube.com/vi/K5tRSwd-Sc0/maxresdefault.jpg">
+                    <img class="embed-responsive-item" src="https://img.youtube.com/vi/{{ $bestVideoHome->getId() }}/maxresdefault.jpg">
                     <div class="video-caption">
-                        <h5>For Honor: Walkthrough Gameplay Warlords</h5>
-                        <span class="length">5:32</span>
+                        <h5>{{ getTitle($bestVideoHome->getId()) }}</h5>
+                        <span class="length">{{ convtime($bestVideoHome->getContentDetails()->getDuration()) }}</span>
                     </div>
                     <div class="video-play-icon">
                         <i class="fa fa-play"></i>

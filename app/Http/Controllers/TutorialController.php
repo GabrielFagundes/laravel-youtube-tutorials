@@ -74,6 +74,16 @@ class TutorialController extends Controller
         $uploadedVideos = $youtube->returnUploadedVideos();
         $videoContents = $youtube->returnVideoContent($uploadedVideos);
 
+        $tutorials = Tutorial::all();
+
+        foreach ($uploadedVideos['items'] as $video){
+            foreach ($tutorials as $tutorial){
+                if($video->getSnippet()->getResourceId()->getVideoId() == $tutorial->link){
+                    $video->temtutorial = true;
+                }
+            }
+        }
+
         return view('tutorial.upload')->with(compact('uploadedVideos', 'videoContents'));
     }
 

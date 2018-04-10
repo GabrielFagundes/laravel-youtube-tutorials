@@ -38,9 +38,13 @@ class HomeController extends Controller
         $bestTutorials = $this->getBestTutorials();
         $bestVideos = $youtube->returnVideoContent($bestTutorials);
 
-//        dd($bestVideos);
+        $bestTutorial = $this->getBestTutorial();
+        $bestVideo = $youtube->returnVideoContent($bestTutorial);
+        $bestVideoHome = $bestVideo['items'][0];
 
-        return view('home')->with(compact('tutorials', 'videos', 'relativeVideos', 'bestVideos'));
+//        dd($bestVideoHome);
+
+        return view('home')->with(compact('tutorials', 'videos', 'relativeVideos', 'bestVideos', 'bestVideoHome'));
     }
 
     public function loadDataAjax(Request $request){
@@ -111,6 +115,23 @@ class HomeController extends Controller
                              group by tutorials.id, tutorials.title, tutorials.description
                              order by avgrating desc
                              limit 8");
+
+        return $result;
+    }
+
+    public function getBestTutorial(){
+
+        $result = DB::select("select tutorials.id, 
+                                     tutorials.title, 
+                                     tutorials.description, 
+                                     tutorials.link,
+                                     avg(ratings.rating) as avgrating from tutorials 
+                             join ratings
+                             on 	ratings.rateable_id = tutorials.id
+                             where tutorials.approved = 'S'
+                             group by tutorials.id, tutorials.title, tutorials.description
+                             order by avgrating desc
+                             limit 1");
 
         return $result;
     }

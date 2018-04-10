@@ -11,7 +11,15 @@
 @section('content')
 
     <!-- main -->
-    <section class="bg-image" style="background-image: url('https://img.youtube.com/vi/zSd9McRXHZ8/maxresdefault.jpg');">
+    <section class="bg-image"
+            @if($tutorial->category_id == 1)
+             style="background-image: url('https://tutoriube.dev/img/tutorial/background-pubg.jpg');
+            @elseif($tutorial->category_id == 2)
+             style="background-image: url('https://tutoriube.dev/img/tutorial/background-lol.jpg');
+            @else($tutorial->category_id == 3)
+             style="background-image: url('https://tutoriube.dev/img/tutorial/background-csgo.jpg');
+            @endif
+    ">
         <div class="overlay-light"></div>
         <div class="container">
             <div class="embed-responsive embed-responsive-16by9">
@@ -72,7 +80,7 @@
                     <div class="sidebar">
                         <!-- widget post  -->
                         <div class="widget widget-videos">
-                            <h5 class="widget-title">Recommends</h5>
+                            <h5 class="widget-title">Recomendados</h5>
                             <ul class="widget-list">
                                 @foreach($videos['items'] as $video)
                                     <li>

@@ -9,7 +9,6 @@
                 <p>Abaixo você poderá selecionar um de seus vídeos do youtube para criar um tutorial</p>
             </div>
             @if($uploadedVideos['items'])
-                <hidden style="display: none;">{{ $noresult = true }}</hidden>
                 <div class="row row-5">
                     @foreach ($uploadedVideos['items'] as $video)
                         @if(!$video->temtutorial)

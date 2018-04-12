@@ -30,7 +30,7 @@
                                             <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
                                         </a>
                                         <div class="card-meta">
-                                            <span>15:56</span>
+                                            <span>{{ convtime($video->getContentDetails()->getDuration()) }}</span>
                                         </div>
                                     </div>
                                     <div class="card-block">

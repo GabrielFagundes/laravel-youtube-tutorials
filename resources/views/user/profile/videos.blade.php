@@ -11,12 +11,13 @@
                     @foreach($videos['items'] as $video)
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="card card-video">
-                                <div class="card-img">
-                                    <a href="{{ url('/tutorial/'. $video->getId()) }}">
+                                <div class="card-img" style="position: relative">
+                                    <a id="delete" href="{{ url('/tutorial/delete/'. $video->getId()) }}" class="btn btn-danger" style="display: none; float: right; position: absolute;"><i class="fa fa-trash"></i></a>
+                                    <a  href="{{ url('/tutorial/'. $video->getId()) }}">
                                         <img src="{{ $video->getSnippet()->getThumbnails()->getMedium()->getUrl() }}" alt="Top 5 Brutal Gameplay Moments in For Honor">
                                     </a>
                                     <div class="card-meta">
-                                        <span>15:56</span>
+                                        <span>{{ convtime($video->getContentDetails()->getDuration()) }}</span>
                                     </div>
                                 </div>
                                 <div class="card-block">
@@ -31,11 +32,11 @@
                         </div>
                     @endforeach
                 </div>
-                @if ($video['tutorial_id'] > 1)
-                    <div id="remove-row">
-                        <div id="btn-more"  data-id="{{ $video['tutorial_id'] }}"  class="text-center"><a class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20" style="color:white;">Mostrar mais</a></div>
-                    </div>
-                @endif
+                {{--@if ($video['tutorial_id'] > 1)--}}
+                    {{--<div id="remove-row">--}}
+                        {{--<div id="btn-more"  data-id="{{ $video['tutorial_id'] }}"  class="text-center"><a class="btn btn-primary btn-shadow btn-rounded btn-effect btn-lg m-t-20" style="color:white;">Mostrar mais</a></div>--}}
+                    {{--</div>--}}
+                {{--@endif--}}
         </section>
 
     </div>
@@ -70,6 +71,17 @@
                     }
                 });
             });
+
+            @if($user->id == Auth::user()->id)
+                $(document).ready(function () {
+                    $(document).on('mouseenter', '.card-img', function () {
+                        $(this).find("#delete").show();
+                    }).on('mouseleave', '.card-img', function () {
+                        $(this).find("#delete").hide();
+                    });
+                });
+            @endif;
+
         });
     </script>
 

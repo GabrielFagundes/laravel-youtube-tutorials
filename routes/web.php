@@ -34,6 +34,7 @@ Route::post('profile/user/completeprofile', 'ProfileController@update')->name('p
 Route::get('tutorial/upload/video', 'TutorialController@uploadIndex')->name('tutorial.video');
 Route::post('tutorial/upload/video', 'TutorialController@uploadCreate')->name('tutorial.upload');
 Route::post('tutorial/upload/save', 'TutorialController@uploadSubmit')->name('tutorial.save');
+Route::get('tutorial/delete/{id}', 'TutorialController@delete')->name('tutorial.delete');
 
 
 Route::post('/search/video', 'TutorialController@search')->name('tutorial.search');

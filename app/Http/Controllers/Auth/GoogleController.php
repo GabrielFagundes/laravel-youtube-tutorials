@@ -43,7 +43,7 @@ class GoogleController extends Controller
         if ($google_user->refreshToken){
             $google_user_refresh_token = $google_user->refreshToken;
         }
-//        dd($google_user);
+        //dd($google_user);
 
 
         // transforma os tokens recebido pelo socialite para utilização com o client do google

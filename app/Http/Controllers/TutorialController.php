@@ -43,7 +43,7 @@ class TutorialController extends Controller
 
         $tutorials = Tutorial::with('category')
             ->forCategory($category)
-            ->where('approved' , 'S')
+//            ->where('approved' , 'S')
             ->orderBy('id', 'desc')
             ->paginate(10);
 
@@ -123,8 +123,8 @@ class TutorialController extends Controller
 
             //Se está sendo inserido pelo administrador, o tutorial vai direto para as publicações,
             // senão usa o valor default = N
-            if (!$user->isAdmin())
-                $tutorial->approved = 'S';
+//            if (!$user->isAdmin())
+//                $tutorial->approved = 'S';
 
             $tutorial = new Tutorial;
             $tutorial->title = $request->title;
@@ -142,12 +142,21 @@ class TutorialController extends Controller
         }
 
         if (!$user->isAdmin())
-            Alert::info('Aguarde até que um de nossos administradores realize a aprovação para que o TUTORIAL seja publicado', 'Enviado!')->persistent("Ok");
+            Alert::success('Seu tutorial foi adicionado à nossa lista e já pode ser visualizado', 'Enviado!')->persistent("Ok");
         else
             Alert::success('Seu tutorial foi enviado e publicado.');
 
 
         return redirect('/');
+    }
+
+    public function delete($id){
+
+        $tutorial = Tutorial::where('link', $id)->delete();
+//        alert('<a href="#">Click me</a>')->html()->persistent("No, thanks", "Yes, sir");
+//        Alert::info('Seu tutorial para este vídeo foi excluído. O vídeo encontra-se na sua tela de uploads para adicionar um novo tutorial', 'Tutorial Excluído!')->persistent("Ok");
+
+        return back();
     }
 
 }

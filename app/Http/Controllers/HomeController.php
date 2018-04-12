@@ -111,7 +111,6 @@ class HomeController extends Controller
                                      avg(ratings.rating) as avgrating from tutorials 
                              join ratings
                              on 	ratings.rateable_id = tutorials.id
-                             where tutorials.approved = 'S'
                              group by tutorials.id, tutorials.title, tutorials.description
                              order by avgrating desc
                              limit 8");
@@ -128,7 +127,6 @@ class HomeController extends Controller
                                      avg(ratings.rating) as avgrating from tutorials 
                              join ratings
                              on 	ratings.rateable_id = tutorials.id
-                             where tutorials.approved = 'S'
                              group by tutorials.id, tutorials.title, tutorials.description
                              order by avgrating desc
                              limit 1");

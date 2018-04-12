@@ -43,7 +43,10 @@ class ProfileController extends Controller
         }
 
         $youtube = new Youtube();
-        $tutorials = Tutorial::where('user_id', $user->id)->orderBy('id', 'DESC')->limit(12)->get();
+        $tutorials = Tutorial::where('user_id', $user->id)->orderBy('id', 'DESC')->limit(30)->get();
+
+//        dd($tutorials);
+
         $videos = $youtube->returnVideoContent($tutorials);
 
         $user->avgUserRating = $this->getUserAvgRating($id);
